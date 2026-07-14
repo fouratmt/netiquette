@@ -5,19 +5,18 @@ set. Resolved choices move to `decisions.md`.
 
 ## Current questions
 
-1. Which language should a first-time visitor see, and should browser-language
-   detection be used?
-2. Should Tunisian Arabic use Arabic script, Latin-script Arabizi, or offer
-   both?
-3. How many entries—and which platform groupings—belong in the first usable
-   catalog?
+1. Should the current private GitHub repository be made public, or will it use a
+   plan that supports Pages from private repositories?
+2. Will the site initially use `https://fouratmt.github.io/netiquette/` or a
+   custom domain?
+3. Does the drafted explanatory footer feel neutral enough in all three
+   languages, or should its wording change before launch?
+4. Which seven behaviors should complete the initial twelve-entry catalog?
 
 ## Later questions
 
-- Should public entry slugs be translated, or remain language-independent?
-- Should known entry routes be statically pre-rendered for richer link previews,
-  or is a client-rendered SPA sufficient initially?
 - Should privacy-preserving usage measurement be added after the MVP proves
   useful?
-- Where will the application be deployed?
+- Should a social-preview image be created for entry links?
 - Who owns editorial approval when more contributors are involved?
+- Who will review the French and Tunisian Arabic drafts before launch?

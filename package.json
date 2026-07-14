@@ -1,0 +1,33 @@
+{
+  "name": "netiquette",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite-ssg build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "verify:pages": "node scripts/verify-pages-build.mjs",
+    "check": "vue-tsc --noEmit && vitest run && vite-ssg build"
+  },
+  "dependencies": {
+    "@unhead/vue": "^2.1.15",
+    "vue": "^3.5.39",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.3",
+    "vite-ssg": "^28.3.0",
+    "vitest": "^4.1.10",
+    "vue-tsc": "^3.3.6"
+  }
+}

@@ -47,8 +47,9 @@ should communicate the same intent and level of kindness, but translations do
 not need to be literal. Natural local phrasing is more important than preserving
 the source language's sentence structure.
 
-The Tunisian Arabic script and transliteration policy remain to be decided.
-Each translation should ultimately be reviewed by a fluent speaker rather than
+Tunisian Arabic uses Arabic script in the MVP and is presented right-to-left.
+Latin-script Arabizi may be considered later if readers ask for it. Each
+translation should ultimately be reviewed by a fluent speaker rather than
 accepted as unreviewed machine translation.
 
 ## Entry template

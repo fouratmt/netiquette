@@ -1,0 +1,6 @@
+packages:
+  - "."
+
+# Avoid dependencies published within the last seven days unless intentionally
+# reviewed and added to the exclusion list.
+minimumReleaseAge: 10080

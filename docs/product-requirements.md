@@ -98,6 +98,7 @@ The MVP is a public, read-only catalog.
 - Search-engine and social-sharing metadata where the chosen deployment model
   permits it.
 - A small, curated starter catalog stored with the application.
+- An initial set of approximately 12 polished behaviors.
 
 ### Out of scope
 
@@ -150,6 +151,10 @@ These are working examples, not final editorial copy:
   someone’s profile.
 - Remember that comments on public posts may be shown to people beyond the
   immediate conversation.
+
+The initial platform groupings are Instagram, Facebook, Messenger, WhatsApp,
+and General. “General” covers conventions that are not tied to a particular
+service.
 
 ## Functional requirements
 

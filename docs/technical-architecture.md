@@ -2,8 +2,8 @@
 
 ## Status
 
-Proposed architecture for the MVP. Vue is decided; some implementation details
-remain open pending the next product questions.
+Implemented architecture for the first usable MVP slice. Release and editorial
+details remain open.
 
 ## Chosen direction
 
@@ -14,82 +14,83 @@ remain open pending the next product questions.
 - Catalog content shipped with the application.
 - No backend, authentication, database, or user-generated content in the MVP.
 
-The generic Next.js/vinext starter has been removed. The repository is now a
-clean documentation-first foundation ready for the Vue scaffold.
+The generic Next.js/vinext starter has been removed and replaced by the Vue
+application described below.
 
-## Recommended application shape
+## Task runner
 
-Use a small Vue 3 application built with Vite and Vue Router.
+`just` is the project-facing task runner for local development and GitHub
+Actions. Recipes delegate to pnpm, which remains responsible for dependency
+installation and Node package scripts. Run `just` to list the available tasks.
+
+## Application shape
+
+The application uses Vue 3, Vite, Vue Router, and static generation.
 
 ```text
 src/
   app/
-    router.ts
+    routes.ts
   components/
   content/
-    entries/
-    categories.ts
-    platforms.ts
-    locales/
+    catalog.ts
   domain/
-    etiquette.ts
     locale.ts
     search.ts
+    types.ts
   views/
     HomeView.vue
-    BrowseView.vue
+    CatalogView.vue
     EntryView.vue
     NotFoundView.vue
   App.vue
   main.ts
 ```
 
-The final content file format—TypeScript, JSON, or Markdown—is still open. It
-should support schema validation, aligned translations, and editorial changes
-independent of UI components.
+Catalog content currently lives in a typed TypeScript module. It keeps aligned
+translations, categories, platforms, and interface strings independent of Vue
+components. Splitting the module into smaller files can wait until catalog size
+makes that useful.
 
 ## Routes
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Detect or select a language, subject to the remaining locale decision. |
+| `/` | Detect or select a language, with English fallback. |
 | `/:locale` | Explain the product, offer search, and show common categories or entries. |
 | `/:locale/etiquette` | Browse and search the localized catalog. |
 | `/:locale/etiquette/:slug` | Read and share one localized etiquette entry. |
-| `/:locale/category/:slug` | Browse a situation-based category. |
-| `/:locale/platform/:slug` | Browse entries associated with a platform. |
+| `/:locale/etiquette?category=:id` | Browse a situation-based category. |
+| `/:locale/etiquette?platform=:id` | Browse entries associated with a platform. |
 | catch-all | Friendly not-found page with search and browse links. |
 
-The localized entry route is the product’s center. Public slugs must be
-human-readable, stable, and unique within their locale. Entries also need a
-language-independent ID so the language switcher can find an equivalent
-translation even when localized slugs differ.
+The localized entry route is the product’s center. Public slugs are readable,
+stable, language-independent identifiers. Each entry also has an internal ID
+used for related-entry validation.
 
-## Proposed content model
+## Content model
 
 ```ts
 type EtiquetteEntry = {
   id: string;
-  locale: "en" | "fr" | "ar-TN";
   slug: string;
-  title: string;
-  takeaway: string;
-  situation: string;
-  whyItMatters: string;
-  whatToDo: string;
-  nuance?: string;
   category: string;
   platforms: string[];
-  tags: string[];
   related: string[];
-  status: "draft" | "published";
+  translations: Record<"en" | "fr" | "ar-TN", {
+    title: string;
+    takeaway: string;
+    situation: string;
+    whyItMatters: string;
+    whatToDo: string;
+    nuance?: string;
+    tags: string[];
+  }>;
 };
 ```
 
-Validation should reject duplicate locale/slug pairs, missing required fields,
-invalid related-entry references, mismatched translation IDs, unknown category
-or platform references, and draft entries accidentally exposed by the
-published catalog.
+Tests reject duplicate IDs or slugs, missing translations, invalid related-entry
+references, and unknown category or platform references.
 
 ## Localization
 
@@ -103,7 +104,15 @@ published catalog.
   avoid hard-coded left/right spacing and directional icons.
 - Search only the active locale for the MVP.
 
-The default locale, Tunisian Arabic script, and public slug policy remain open.
+On `/`, select the best supported locale from the browser's language
+preferences and fall back to English. Remember an explicit language choice
+locally and prefer it on later visits to `/`. A URL that already contains a
+locale always wins, ensuring that shared links retain the sender's language.
+
+Tunisian Arabic uses Arabic script and a right-to-left document direction in
+the MVP. Latin-script Arabizi is deferred. Public routes use `ar-tn`, while the
+application and document metadata use `ar-TN`. Every locale uses the same
+stable ASCII entry slug.
 
 ## Search
 
@@ -125,19 +134,10 @@ Search state should be reflected in the URL query string, for example
 
 ## Rendering and discoverability
 
-A client-rendered Vite SPA is the simplest implementation. However, direct
-links are the core product, and rich per-entry search/social metadata may
-eventually justify pre-rendering the known entry routes.
-
-Before implementation, choose between:
-
-- **SPA:** smallest setup; requires host fallback routing; per-entry metadata is
-  less dependable for crawlers and link previews.
-- **Static pre-rendering:** generates an HTML page for each known entry; better
-  metadata and direct-link resilience, with slightly more build complexity.
-
-This choice does not require Next.js. It can be implemented within a Vue/Vite
-toolchain or with a Vue meta-framework only if clearly justified.
+The application uses `vite-ssg` to pre-render every known route as nested static
+HTML, then hydrates those pages as a Vue application. This preserves fast direct
+links and localized metadata without requiring an application server. Adding a
+catalog entry automatically adds three concrete entry routes to the build.
 
 ## Accessibility
 
@@ -166,8 +166,46 @@ toolchain or with a Vue meta-framework only if clearly justified.
 - The host must serve the application or generated entry page for direct route
   requests.
 - HTTPS is required for reliable clipboard and native share capabilities.
-- Deployment-platform selection remains open.
+- GitHub Pages is the planned MVP deployment target.
 - The Sites workflow is explicitly excluded from this project.
+
+## GitHub Pages compatibility
+
+GitHub Pages is compatible with the MVP and is the planned hosting target. The
+checked-in GitHub Actions workflows verify the project, build the Vite
+application, and deploy the static `dist` artifact.
+
+Continuous integration and deployment are separate workflows:
+
+- `ci.yml` runs type checking, tests, a Pages-base build, and artifact validation
+  for pull requests, pushes to `main`, and manual runs.
+- `deploy-pages.yml` repeats the release checks, uploads only `dist`, and deploys
+  through GitHub's Pages environment on pushes to `main` or manual runs.
+- Both workflows call `just` recipes, keeping their build commands identical to
+  local development.
+- The Pages artifact validator derives the expected entry routes from the
+  catalog and checks localized HTML, asset paths, and document direction before
+  upload.
+
+Implementation considerations:
+
+- A repository site such as `https://USER.github.io/netiquette/` needs Vite's
+  base path set to `/netiquette/`; a user site or custom domain uses `/`.
+- GitHub Pages serves static files and supports a custom `404.html`, but it does
+  not provide general-purpose application-server rewrites.
+- Refresh-safe direct entry links and localized link metadata are provided by
+  statically pre-rendering all known locale and entry routes with nested
+  `index.html` files.
+- Publish with the official GitHub Pages Actions flow after the repository is
+  enabled with **GitHub Actions** as its Pages source.
+- GitHub Free supports Pages for public repositories. Hosting from a private
+  repository depends on the account plan.
+
+References:
+
+- [Vite: Deploying a static site](https://vite.dev/guide/static-deploy.html#github-pages)
+- [GitHub: Using custom workflows with GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+- [GitHub: Creating a GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site)
 
 ## Future evolution
 

@@ -3,6 +3,7 @@ import { RouterLink } from "vue-router";
 import { getCategory, getPlatform } from "../content/catalog";
 import { entryPath } from "../domain/locale";
 import type { EtiquetteEntry, Locale } from "../domain/types";
+import TaxonomyBadge from "./TaxonomyBadge.vue";
 
 defineProps<{ entry: EtiquetteEntry; locale: Locale }>();
 
@@ -16,16 +17,17 @@ function uiRead(locale: Locale): string {
 <template>
   <article class="entry-card">
     <div class="entry-card__meta">
-      <span class="badge badge--category">
-        {{ getCategory(entry.category)?.label[locale] }}
-      </span>
-      <span
+      <TaxonomyBadge
+        :name="entry.category"
+        :label="getCategory(entry.category)?.label[locale] ?? entry.category"
+        category
+      />
+      <TaxonomyBadge
         v-for="platformId in entry.platforms"
         :key="platformId"
-        class="badge"
-      >
-        {{ getPlatform(platformId)?.label[locale] }}
-      </span>
+        :name="platformId"
+        :label="getPlatform(platformId)?.label[locale] ?? platformId"
+      />
     </div>
     <h3>
       <RouterLink :to="entryPath(locale, entry.slug)">

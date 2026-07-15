@@ -123,7 +123,7 @@ The MVP is a public, read-only catalog.
 
 The visitor can search in plain language, such as “speaker phone,” “old
 Instagram photo,” or “public Facebook comment.” Search results should show the
-title, one-sentence takeaway, category, and relevant tags.
+title, one-sentence takeaway, category, and relevant platform labels.
 
 ### Read an etiquette entry
 

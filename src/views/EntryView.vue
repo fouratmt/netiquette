@@ -6,6 +6,7 @@ import EntryCard from "../components/EntryCard.vue";
 import QrShare from "../components/QrShare.vue";
 import SeverityIndicator from "../components/SeverityIndicator.vue";
 import ShareActions from "../components/ShareActions.vue";
+import TaxonomyBadge from "../components/TaxonomyBadge.vue";
 import {
   getCategory,
   getEntryById,
@@ -49,21 +50,31 @@ useHead(() => ({
             <span aria-hidden="true">←</span> {{ ui[locale].backToCatalog }}
           </RouterLink>
 
-          <div class="entry-hero__meta">
-            <span class="badge badge--category">
-              {{ getCategory(entry.category)?.label[locale] }}
-            </span>
-            <span v-for="platformId in entry.platforms" :key="platformId" class="badge">
-              {{ getPlatform(platformId)?.label[locale] }}
-            </span>
-          </div>
+          <div class="entry-hero__layout">
+            <div class="entry-hero__content">
+              <div class="entry-hero__meta">
+                <TaxonomyBadge
+                  :name="entry.category"
+                  :label="getCategory(entry.category)?.label[locale] ?? entry.category"
+                  category
+                />
+                <TaxonomyBadge
+                  v-for="platformId in entry.platforms"
+                  :key="platformId"
+                  :name="platformId"
+                  :label="getPlatform(platformId)?.label[locale] ?? platformId"
+                />
+              </div>
 
-          <h1>{{ translation.title }}</h1>
-          <p class="entry-hero__takeaway">{{ translation.takeaway }}</p>
-          <SeverityIndicator :locale="locale" :severity="entry.severity" />
-          <div class="entry-hero__sharing">
-            <ShareActions :locale="locale" :title="translation.title" />
-            <QrShare :locale="locale" />
+              <h1>{{ translation.title }}</h1>
+              <p class="entry-hero__takeaway">{{ translation.takeaway }}</p>
+              <SeverityIndicator :locale="locale" :severity="entry.severity" />
+            </div>
+
+            <aside class="entry-hero__sharing">
+              <QrShare :locale="locale" />
+              <ShareActions :locale="locale" :title="translation.title" />
+            </aside>
           </div>
         </div>
       </header>

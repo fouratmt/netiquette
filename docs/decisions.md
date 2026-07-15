@@ -58,7 +58,7 @@
 - **Decision:** Present the etiquette content directly, without an accusatory or
   personalized preamble. Use a visually secondary footer to explain the site's
   shareable-etiquette context.
-- **Status:** Accepted; exact footer copy remains open.
+- **Status:** Accepted and implemented; fluent-language review remains open.
 - **Reason:** The content should be useful on its own, while the footer can help
   a recipient understand the product without suggesting why they personally
   received a link.
@@ -75,10 +75,12 @@
 
 - **Decision:** Begin with approximately 12 polished behaviors grouped across
   Instagram, Facebook, Messenger, WhatsApp, and General.
-- **Status:** Accepted.
+- **Status:** Superseded after the MVP proved the content model.
 - **Reason:** This is large enough to exercise search, categories, overlapping
   platforms, related entries, and translation without making initial editorial
   work unmanageable.
+- **Outcome:** The catalog was expanded to 19 entries while keeping the original
+  five platform groupings.
 
 ## D-011 — Stable localized URLs
 
@@ -166,3 +168,13 @@
   is mild awkwardness, discomfort, a serious loss of trust, or a consent and
   privacy risk. The scale evaluates the behavior’s possible impact, not the
   person who receives the link.
+
+## D-020 — Production hosting
+
+- **Decision:** Keep the repository public, deploy `main` with GitHub Pages
+  Actions, and serve the project at `https://fourat.dev/netiquette/` while the
+  standard GitHub Pages URL redirects to it.
+- **Status:** Accepted, implemented, and live.
+- **Reason:** Public Pages hosting fits the read-only static architecture,
+  provides HTTPS for PWA and sharing features, and keeps deployment tied to the
+  same verified artifact used in CI.

@@ -95,6 +95,9 @@ export type UiMessages = {
   receivedNote: string;
   backToCatalog: string;
   footerContext: string;
+  footerExploreTitle: string;
+  footerLanguagesTitle: string;
+  footerNote: string;
   notFoundEyebrow: string;
   notFoundTitle: string;
   notFoundBody: string;

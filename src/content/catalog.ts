@@ -1168,7 +1168,7 @@ export const ui: Record<Locale, UiMessages> = {
     whyTitle: "Why it matters",
     insteadTitle: "What to do instead",
     nuanceTitle: "A little context",
-    severityTitle: "Impact if ignored",
+    severityTitle: "Potential impact",
     relatedTitle: "Related etiquette",
     copyLink: "Copy link",
     copied: "Link copied",
@@ -1204,6 +1204,9 @@ export const ui: Record<Locale, UiMessages> = {
     backToCatalog: "Back to the catalog",
     footerContext:
       "Netiquette is a collection of shareable reminders for everyday digital life. Sometimes a link is easier to share than an awkward correction; the advice is here to inform, not to judge.",
+    footerExploreTitle: "Explore",
+    footerLanguagesTitle: "Languages",
+    footerNote: "A small guide for kinder digital habits.",
     notFoundEyebrow: "Page not found",
     notFoundTitle: "This link does not match an etiquette entry.",
     notFoundBody:
@@ -1246,7 +1249,7 @@ export const ui: Record<Locale, UiMessages> = {
     whyTitle: "Pourquoi c’est important",
     insteadTitle: "Que faire à la place",
     nuanceTitle: "Un peu de contexte",
-    severityTitle: "Gravité en cas de non-respect",
+    severityTitle: "Impact possible",
     relatedTitle: "Règles associées",
     copyLink: "Copier le lien",
     copied: "Lien copié",
@@ -1282,6 +1285,9 @@ export const ui: Record<Locale, UiMessages> = {
     backToCatalog: "Retour au catalogue",
     footerContext:
       "Netiquette rassemble des rappels partageables pour la vie numérique quotidienne. Un lien est parfois plus simple à transmettre qu’une correction gênante ; ces conseils sont là pour informer, pas pour juger.",
+    footerExploreTitle: "Explorer",
+    footerLanguagesTitle: "Langues",
+    footerNote: "Un petit guide pour des habitudes numériques plus attentionnées.",
     notFoundEyebrow: "Page introuvable",
     notFoundTitle: "Ce lien ne correspond à aucune règle.",
     notFoundBody:
@@ -1322,7 +1328,7 @@ export const ui: Record<Locale, UiMessages> = {
     whyTitle: "علاش هذا مهم",
     insteadTitle: "شنوة تعمل عوض هذا",
     nuanceTitle: "شوية توضيح",
-    severityTitle: "درجة التأثير كان ما تحترمش القاعدة",
+    severityTitle: "التأثير الممكن",
     relatedTitle: "قواعد عندها علاقة",
     copyLink: "انسخ الرابط",
     copied: "الرابط تنسخ",
@@ -1358,6 +1364,9 @@ export const ui: Record<Locale, UiMessages> = {
     backToCatalog: "ارجع للدليل",
     footerContext:
       "نتيكات يجمع تذكيرات تنجم تتشارك للحياة الرقمية اليومية. ساعات رابط يكون أسهل من ملاحظة محرجة؛ النصيحة هنا باش توضّح، موش باش تحكم على الناس.",
+    footerExploreTitle: "اكتشف",
+    footerLanguagesTitle: "اللغات",
+    footerNote: "دليل صغير لعادات رقمية فيها ذوق أكثر.",
     notFoundEyebrow: "الصفحة موش موجودة",
     notFoundTitle: "الرابط هذا ما يوصّلش لقاعدة موجودة.",
     notFoundBody:

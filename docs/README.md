@@ -9,7 +9,7 @@ documents are intentionally short and should evolve with the product.
   scope, experience, and success criteria.
 - [Content and voice guide](./content-and-voice.md) — how etiquette entries are
   structured and written.
-- [Technical architecture](./technical-architecture.md) — proposed Vue
+- [Technical architecture](./technical-architecture.md) — implemented Vue
   architecture, routes, data model, and engineering constraints.
 - [Decision log](./decisions.md) — decisions already made and the reasoning
   behind them.
@@ -26,4 +26,3 @@ When a decision is made:
 2. Update any affected requirements or architecture.
 3. Remove it from `open-questions.md`.
 4. Update `implementation-progress.md` when it changes the delivery plan.
-

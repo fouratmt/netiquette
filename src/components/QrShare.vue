@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <aside class="qr-share">
+  <div class="qr-share">
     <div class="qr-share__copy">
       <strong>{{ ui[locale].qrTitle }}</strong>
       <span>{{ ui[locale].qrBody }}</span>
@@ -33,5 +33,5 @@ onMounted(() => {
       />
       <span v-else class="qr-share__placeholder" />
     </div>
-  </aside>
+  </div>
 </template>

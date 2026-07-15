@@ -3,8 +3,8 @@
 Netiquette is a multilingual catalog of considerate behaviors for phones,
 messaging, social media, and other online interactions.
 
-Each etiquette entry will have a permanent link that someone can share. The
-page will explain the behavior, why it matters, and what to do instead in a
+Each etiquette entry has a permanent link that someone can share. The page
+explains the behavior, why it matters, and what to do instead in a
 kind, neutral voice.
 
 ## Project status
@@ -49,16 +49,19 @@ needed.
 
 ## GitHub Pages
 
+The production site is live at
+[https://fourat.dev/netiquette/](https://fourat.dev/netiquette/). The standard
+GitHub Pages URL redirects to that address.
+
 The workflow in `.github/workflows/ci.yml` verifies pull requests and pushes to
 `main`. The deployment workflow in `.github/workflows/deploy-pages.yml` verifies,
 builds, validates, and publishes the site when `main` is pushed or the workflow
 is started manually.
 
-Before the first deployment, open **Settings → Pages** in the GitHub repository
-and select **GitHub Actions** as the source. The repository is currently private,
-so its owner must either use a GitHub plan that supports Pages for private
-repositories or make the repository public. Without a custom domain, the
-expected project URL is `https://fouratmt.github.io/netiquette/`.
+The public repository uses **GitHub Actions** as its Pages source. Pushes to
+`main` are validated and deployed automatically. The project keeps the
+`/netiquette/` base path so assets, direct links, and PWA scope work at both the
+GitHub Pages URL and the current custom-domain path.
 
 ## Progressive Web App
 

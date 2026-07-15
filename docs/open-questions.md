@@ -5,17 +5,17 @@ set. Resolved choices move to `decisions.md`.
 
 ## Current questions
 
-1. Should the current private GitHub repository be made public, or will it use a
-   plan that supports Pages from private repositories?
-2. Will the site initially use `https://fouratmt.github.io/netiquette/` or a
-   custom domain?
-3. Does the drafted explanatory footer feel neutral enough in all three
-   languages, or should its wording change before launch?
+1. Who will provide final French and Tunisian Arabic editorial sign-off for all
+   nineteen entries, impact labels, and explanatory footer copy?
+2. What minimum accessibility, browser, and real-device checks are required for
+   formal launch sign-off now that the site is already publicly deployed?
+3. Should each entry receive a dedicated social-preview image, or is one shared
+   Netiquette preview image sufficient for the MVP?
 
 ## Later questions
 
 - Should privacy-preserving usage measurement be added after the MVP proves
   useful?
-- Should a social-preview image be created for entry links?
 - Who owns editorial approval when more contributors are involved?
-- Who will review the French and Tunisian Arabic drafts before launch?
+- Should Tunisian Arabic eventually offer Latin-script Arabizi alongside Arabic
+  script?

@@ -2,20 +2,48 @@
 
 Last updated: 2026-07-15
 
+## Progress tracker
+
+**MVP launch readiness: 79% — 42 of 53 tracked tasks complete.**
+
+`████████████████░░░░ 79%`
+
+The percentage counts the unique checklist items in milestones 1–5 below.
+Optional post-MVP backlog items and the operational deployment checklist are
+excluded so repeated checks do not inflate or reduce the result.
+
+| Milestone | Complete | Progress |
+| --- | ---: | ---: |
+| Product foundation | 10 / 10 | 100% |
+| Vue scaffold | 7 / 7 | 100% |
+| Core catalog | 14 / 14 | 100% |
+| Quality and delivery | 10 / 10 | 100% |
+| Launch validation and editorial sign-off | 1 / 12 | 8% |
+| **Overall** | **42 / 53** | **79%** |
+
+Update the numerator, denominator, percentage, and table whenever a tracked
+checkbox is added or completed.
+
 ## Current state
 
-- The first usable MVP slice is implemented.
-- The generic Next.js/vinext starter and its generated files have been removed.
-- A fresh Git repository exists on the `main` branch.
-- The Vue interface and a nineteen-entry multilingual catalog are implemented.
-- English, French, and Tunisian Arabic static pages are generated for GitHub
-  Pages, including localized metadata and RTL HTML.
-- Pull-request CI and a separate GitHub Pages deployment workflow are ready
-  locally; they have not yet been committed or run on GitHub.
+- The first usable MVP is implemented with Vue 3, TypeScript, and static
+  generation.
+- The catalog contains nineteen entries in English, French, and Tunisian
+  Arabic, with stable links, related entries, and localized impact ratings.
+- Search, situation and platform filters, homepage sharing, direct sharing, QR
+  codes, PWA installation, and offline precaching are implemented.
+- Category and platform icons, a compact entry hero, a prominent QR panel, and
+  a complete localized footer are implemented locally and await the next
+  production deployment.
+- CI and GitHub Pages deployment run from GitHub Actions.
+- The public production site is live at `https://fourat.dev/netiquette/`; the
+  standard GitHub Pages URL redirects there.
+- Remaining MVP work is validation and editorial sign-off rather than missing
+  core product functionality.
 
 ## Milestones
 
-### 1. Product foundation — completed
+### 1. Product foundation — 10/10 complete
 
 - [x] Establish working name and kind, neutral editorial voice.
 - [x] Define the read-only MVP boundary.
@@ -24,11 +52,11 @@ Last updated: 2026-07-15
 - [x] Choose browser-language detection with English fallback.
 - [x] Choose Arabic script and RTL for Tunisian Arabic.
 - [x] Choose situation categories with an additional platform grouping.
-- [x] Set a launch target of roughly 12 behaviors.
+- [x] Set an initial launch target of roughly 12 behaviors.
 - [x] Choose stable ASCII slugs across languages.
 - [x] Choose static pre-rendering for known routes.
 
-### 2. Vue scaffold — completed
+### 2. Vue scaffold — 7/7 complete
 
 - [x] Scaffold Vue 3, TypeScript, Vite, Vue Router, and `vite-ssg`.
 - [x] Establish localized static routes and an application shell.
@@ -38,7 +66,7 @@ Last updated: 2026-07-15
 - [x] Add an isolated pnpm workspace and lockfile.
 - [x] Replace the starter README and tests.
 
-### 3. Core catalog — completed
+### 3. Core catalog — 14/14 complete
 
 - [x] Expand the catalog from 5 to 19 entries.
 - [x] Implement browse, category, and platform filtering.
@@ -47,37 +75,135 @@ Last updated: 2026-07-15
 - [x] Implement copy-link and native sharing.
 - [x] Implement language switching, preference persistence, and RTL layouts.
 - [x] Draft all nineteen entries in English, French, and Tunisian Arabic.
-- [x] Add a localized four-level severity indicator to every entry page.
+- [x] Add a localized four-level impact indicator to every entry page.
+- [x] Add category and platform iconography to catalog and entry badges.
+- [x] Tighten the entry hero and keep its QR sharing panel visible.
+- [x] Expand the footer with localized navigation and language links.
 - [x] Add a prominent homepage sharing callout.
 - [x] Add a compact QR code to every behavior page.
 - [x] Explain why the site exists, why it was created, and why a visitor may
   have received an individual link.
 
-### 4. Quality and release — in progress
+### 4. Quality and delivery — 10/10 complete
 
 - [x] Verify desktop and mobile layouts, including mobile RTL overflow.
-- [ ] Complete a broader accessibility review.
 - [x] Verify pre-rendered direct-route structure with a GitHub Pages base path.
 - [x] Verify localized metadata and HTML language/direction attributes.
-- [x] Run unit, route, build, and browser-flow tests.
-- [x] Polish the visual identity with a brighter color system and more varied
-  cards while preserving readability.
+- [x] Run unit, route, build, artifact, and browser-flow tests.
+- [x] Polish the visual identity while preserving readability.
 - [x] Add a GitHub Pages deployment workflow.
 - [x] Add pull-request CI and deterministic Pages artifact validation.
-- [x] Add an installable, automatically updating PWA with offline precaching for
-  all generated routes.
+- [x] Add an installable, automatically updating PWA with offline precaching.
 - [x] Add standard, maskable, and Apple touch application icons.
-- [ ] Conduct a tone and translation review with fluent readers.
-- [ ] Enable GitHub Pages and verify the deployed site.
+- [x] Enable GitHub Pages, merge the MVP, and verify the first deployment.
 
-## Verified user flow
+### 5. Launch validation and editorial sign-off — 1/12 complete
 
-The browser-tested flow searches for “speakerphone,” opens the matching entry,
-copies its link, switches that same entry to Tunisian Arabic, and verifies RTL
-layout at desktop and mobile widths.
+These tasks were extracted from the accessibility, quality, editorial, success
+signal, PWA, and testing requirements across the project documentation.
+
+- [x] Smoke-test the production homepage, one localized direct entry, manifest,
+  and service worker over HTTPS.
+- [ ] Run automated WCAG 2.2 AA checks on the root, home, catalog, entry, and
+  not-found views.
+- [ ] Complete a keyboard-only navigation and visible-focus review.
+- [ ] Complete a screen-reader flow for language selection, search, entry
+  reading, impact scale, sharing status, QR explanation, and footer navigation.
+- [ ] Test current Safari, Firefox, Chromium, and a mobile browser.
+- [ ] Verify desktop/Android PWA installation and iOS Add to Home Screen on real
+  devices.
+- [ ] Verify offline reopening after a successful first production visit.
+- [ ] Scan production QR codes with a physical phone and confirm exact localized
+  entry URLs.
+- [ ] Run a Lighthouse performance review and record an initial performance
+  budget.
+- [ ] Review all nineteen French and Tunisian Arabic entries with fluent
+  readers, including the footer and impact labels.
+- [ ] Audit impact levels, nuance, and named-platform claims for consistency and
+  current accuracy.
+- [ ] Run a small sender/recipient usability review against the qualitative
+  success signals in the PRD.
+
+## Backlog extracted from the documentation
+
+These are useful engineering or product tasks, but they are not counted in the
+MVP launch-readiness percentage until promoted into a milestone.
+
+- [ ] Add component tests for search, cards, installation, and share/copy states.
+- [ ] Add an automated end-to-end flow for finding, opening, sharing, and
+  switching the language of an entry.
+- [ ] Add a generated `404.html` so unknown direct GitHub Pages URLs use the
+  branded not-found experience.
+- [ ] Add canonical and language-alternate metadata for localized public routes.
+- [ ] Decide whether entry links need one shared social-preview image or
+  entry-specific images, then implement the chosen approach.
+- [ ] Decide whether privacy-preserving usage measurement is useful and define
+  its data boundaries before adding analytics.
+- [ ] Define editorial ownership, review, and contribution rules before more
+  contributors edit the catalog.
+- [ ] Define a periodic review schedule for named-platform visibility claims.
+- [ ] Split `catalog.ts` into smaller content modules when catalog maintenance
+  becomes cumbersome.
+
+## Deployment / go-live checklist
+
+**Status: deployed; formal launch sign-off is still pending.**
+
+This operational checklist intentionally repeats a few validation tasks and is
+not included in the 79% calculation.
+
+### Repository and automation
+
+- [x] Keep the GitHub repository public for Pages hosting.
+- [x] Configure **GitHub Actions** as the Pages source.
+- [x] Run CI on pull requests and pushes to `main`.
+- [x] Build and validate the exact Pages artifact before upload.
+- [x] Deploy only after the verification job succeeds.
+- [ ] Decide whether `main` needs branch protection and required status checks.
+
+### Production configuration
+
+- [x] Serve the site over HTTPS.
+- [x] Confirm `https://fourat.dev/netiquette/` as the production URL.
+- [x] Confirm the standard GitHub Pages URL redirects to production.
+- [x] Preserve the `/netiquette/` base path for assets, routes, manifest, and
+  service-worker scope.
+- [ ] Set the repository website field to the production URL.
+- [ ] Record a release tag for the formally approved MVP.
+
+### Production verification
+
+- [x] Confirm successful responses for the homepage, a direct entry, manifest,
+  and service worker.
+- [x] Confirm Pages CI, artifact upload, and deployment jobs are green.
+- [ ] Smoke-test all three languages and representative entries from every
+  category on production.
+- [ ] Complete the accessibility, cross-browser, PWA, offline, QR, performance,
+  and editorial checks in milestone 5.
+- [ ] Verify social-preview title, description, image, and URL in common sharing
+  clients after the preview-image decision is made.
+
+### Launch operations
+
+- [ ] Document how to roll back by reverting or redeploying the previous known
+  good commit.
+- [ ] Name the person responsible for launch approval and production issues.
+- [ ] Decide where visitors or reviewers should report incorrect etiquette or
+  translation problems.
+- [ ] Record the approved release date and short release notes.
+- [ ] Announce the site only after content and validation owners sign off.
+
+## Verified user flows
+
+- Search for “speakerphone,” open the matching entry, copy its link, switch that
+  entry to Tunisian Arabic, and verify RTL at desktop and mobile widths.
+- Open a long French entry title, verify category/platform icons, confirm the QR
+  panel is visible without desktop scrolling, and inspect the localized footer.
+- Build all 64 static pages with the `/netiquette/` base path and validate the
+  installable offline PWA artifact.
 
 ## Immediate next step
 
-Review the expanded English, French, and Tunisian Arabic catalog with fluent
-readers. Then choose whether the private repository will use a Pages-capable
-paid plan or be made public before enabling the first deployment.
+Complete the fluent French and Tunisian Arabic review in parallel with the
+automated accessibility and keyboard checks. These are the highest-value gates
+before treating the already-live deployment as formally launched.

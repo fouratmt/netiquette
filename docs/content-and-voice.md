@@ -72,6 +72,10 @@ the person. Use level 1 for a small social awkwardness, level 2 for discomfort
 or disruption, level 3 for a serious effect on privacy or trust, and level 4
 for a clear consent, privacy, or safety risk.
 
+The interface labels this scale as **Potential impact**, **Impact possible**,
+and **التأثير الممكن**. Avoid punitive labels such as “severity of
+non-compliance,” which can make a shared page sound disciplinary.
+
 Categories describe the situation, such as calls, messaging, or privacy.
 Platforms such as Instagram, Facebook, and Messenger are a separate grouping
 dimension. An entry can reference multiple platforms, and a general convention

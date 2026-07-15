@@ -2,8 +2,8 @@
 
 ## Status
 
-Implemented architecture for the first usable MVP slice. Release and editorial
-details remain open.
+Implemented and deployed architecture for the first usable MVP. Accessibility,
+cross-browser, device, and editorial sign-off work remains open.
 
 ## Chosen direction
 
@@ -153,7 +153,8 @@ after static generation. The PWA layer:
 - precaches every generated HTML route, application asset, icon, and manifest;
 - claims open clients and activates updates immediately;
 - declares 192px, 512px, maskable, and Apple touch icons;
-- uses a standalone display mode and the localized root route as its start URL;
+- uses a standalone display mode and the application root language selector as
+  its start URL;
 - exposes a homepage install button when the browser fires its native
   `beforeinstallprompt` event; and
 - remains installable through browser-native Add to Home Screen controls when
@@ -190,12 +191,12 @@ offline routes, or absent update activation behavior.
 - The host must serve the application or generated entry page for direct route
   requests.
 - HTTPS is required for reliable clipboard and native share capabilities.
-- GitHub Pages is the planned MVP deployment target.
+- GitHub Pages is the active MVP deployment target.
 - The Sites workflow is explicitly excluded from this project.
 
 ## GitHub Pages compatibility
 
-GitHub Pages is compatible with the MVP and is the planned hosting target. The
+GitHub Pages hosts the production MVP. The
 checked-in GitHub Actions workflows verify the project, build the Vite
 application, and deploy the static `dist` artifact.
 
@@ -213,17 +214,18 @@ Continuous integration and deployment are separate workflows:
 
 Implementation considerations:
 
-- A repository site such as `https://USER.github.io/netiquette/` needs Vite's
-  base path set to `/netiquette/`; a user site or custom domain uses `/`.
+- The deployment reads the base path produced by `actions/configure-pages`.
+  The current project is served under `/netiquette/`, including through the
+  custom-domain path, so asset and service-worker URLs retain that prefix.
 - GitHub Pages serves static files and supports a custom `404.html`, but it does
   not provide general-purpose application-server rewrites.
 - Refresh-safe direct entry links and localized link metadata are provided by
   statically pre-rendering all known locale and entry routes with nested
   `index.html` files.
-- Publish with the official GitHub Pages Actions flow after the repository is
-  enabled with **GitHub Actions** as its Pages source.
-- GitHub Free supports Pages for public repositories. Hosting from a private
-  repository depends on the account plan.
+- The public repository is configured with **GitHub Actions** as its Pages
+  source and deploys pushes to `main` through the official Pages Actions flow.
+- Production is available at `https://fourat.dev/netiquette/`; the standard
+  `https://fouratmt.github.io/netiquette/` address redirects there.
 
 References:
 

@@ -124,3 +124,45 @@
   deployment retains the Pages-specific permissions and environment. A local
   artifact check catches missing localized routes and incorrect Vite base paths
   before upload.
+
+## D-016 — Share surfaces
+
+- **Decision:** Make both the localized homepage and individual behavior pages
+  directly shareable. Behavior pages also render a compact, local QR code for
+  handing a page to someone nearby.
+- **Status:** Accepted for the MVP.
+- **Reason:** Copy, native sharing, and QR scanning cover remote and in-person
+  sharing without collecting recipient information or depending on a third-party
+  QR service.
+
+## D-017 — Explain the shared-link context
+
+- **Decision:** Explain the product's purpose on the homepage and add a
+  visually secondary “Why did someone send me this link?” panel after each
+  behavior's practical advice.
+- **Status:** Accepted for the MVP.
+- **Reason:** A recipient should understand the social context of the site
+  without being accused or left to guess. The language stays tentative about
+  the sender's intent and explicitly separates a missed convention from the
+  reader's character.
+
+## D-018 — Installable offline PWA
+
+- **Decision:** Generate a manifest and Workbox service worker during the static
+  build, precache every known route, and expose the browser's native install
+  prompt from the homepage when available.
+- **Status:** Accepted for the MVP.
+- **Reason:** Installation and offline reading make shared guidance easier to
+  keep and revisit without introducing a backend. Generated registration and
+  scope remain compatible with the `/netiquette/` GitHub Pages base path.
+
+## D-019 — Four-level impact scale
+
+- **Decision:** Give every etiquette entry a severity from 1 to 4: light,
+  moderate, important, or critical. Show the value with a localized label,
+  short explanation, and visual meter on the individual entry page.
+- **Status:** Accepted.
+- **Reason:** A shared reminder should communicate whether the likely outcome
+  is mild awkwardness, discomfort, a serious loss of trust, or a consent and
+  privacy risk. The scale evaluates the behavior’s possible impact, not the
+  person who receives the link.

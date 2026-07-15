@@ -16,8 +16,8 @@ sync:
     {{ pnpm }} install
 
 # Start the local development server.
-dev:
-    {{ pnpm }} dev
+dev host="127.0.0.1":
+    {{ pnpm }} dev --host "{{ host }}"
 
 # Run Vue and TypeScript checks.
 typecheck:
@@ -46,8 +46,8 @@ pages-check base_path="/netiquette/":
     BASE_PATH="{{ base_path }}" {{ pnpm }} verify:pages
 
 # Preview the latest production build locally.
-preview:
-    {{ pnpm }} preview
+preview host="127.0.0.1" base_path="/netiquette/":
+    BASE_PATH="{{ base_path }}" {{ pnpm }} preview --host "{{ host }}"
 
 # Run the complete local verification sequence.
 check:

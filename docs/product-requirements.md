@@ -89,6 +89,7 @@ The MVP is a public, read-only catalog.
 - Keyword search across titles, summaries, situations, and tags.
 - Individual etiquette pages with stable direct URLs.
 - A prominent copy-link/share action.
+- A compact QR code for opening the same behavior on a nearby phone.
 - Related etiquette entries.
 - English, French, and Tunisian Arabic interface and content.
 - Right-to-left layout support if required by the chosen Tunisian Arabic
@@ -98,7 +99,12 @@ The MVP is a public, read-only catalog.
 - Search-engine and social-sharing metadata where the chosen deployment model
   permits it.
 - A small, curated starter catalog stored with the application.
-- An initial set of approximately 12 polished behaviors.
+- A curated set of 19 polished behaviors, designed to keep expanding.
+- A localized four-level impact indicator on every behavior page.
+- A prominent way to share the localized homepage as a complete guide.
+- Installable PWA metadata and icons.
+- Offline access to the generated catalog and behavior pages after the first
+  successful visit.
 
 ### Out of scope
 
@@ -124,17 +130,19 @@ title, one-sentence takeaway, category, and relevant tags.
 An entry page should answer, in this order:
 
 1. What is the considerate behavior?
-2. Why does it matter?
-3. What should someone do instead?
-4. Are there important exceptions or nuances?
+2. How serious can the impact be if it is ignored?
+3. Why does it matter?
+4. What should someone do instead?
+5. Are there important exceptions or nuances?
 
 The page should stand on its own when opened from a message, without requiring
 the recipient to understand the rest of the site first.
 
-The main page presents only the etiquette content. A visually secondary footer
-briefly explains that Netiquette is a catalog of shareable digital conventions
-and that links are sometimes shared to make an awkward conversation easier. It
-must not claim to know why a particular visitor received a link.
+The main page presents the etiquette content first. A visually secondary context
+panel then explains that Netiquette is a catalog of shareable digital
+conventions and why someone may choose to send a link rather than make an
+awkward correction. It must use qualified language and never claim to know the
+sender's intent with certainty.
 
 ### Share an entry
 

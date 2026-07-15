@@ -3,7 +3,12 @@ import { onMounted, ref } from "vue";
 import { ui } from "../content/catalog";
 import type { Locale } from "../domain/types";
 
-const props = defineProps<{ locale: Locale; title: string }>();
+const props = defineProps<{
+  locale: Locale;
+  title: string;
+  copyLabel?: string;
+  shareText?: string;
+}>();
 const canShare = ref(false);
 const status = ref("");
 
@@ -37,7 +42,7 @@ async function share() {
   try {
     await navigator.share({
       title: props.title,
-      text: ui[props.locale].shareIntro,
+      text: props.shareText ?? ui[props.locale].shareIntro,
       url: window.location.href,
     });
   } catch (error) {
@@ -50,7 +55,7 @@ async function share() {
   <div class="share-actions">
     <button class="button button--primary" type="button" @click="copyLink">
       <span aria-hidden="true">↗</span>
-      {{ ui[locale].copyLink }}
+      {{ copyLabel ?? ui[locale].copyLink }}
     </button>
     <button
       v-if="canShare"

@@ -62,9 +62,15 @@ Each entry should contain:
 4. **Why it matters** — the effect on other people.
 5. **What to do instead** — concrete steps or wording.
 6. **Nuance** — exceptions or context, only when useful.
-7. **Category and tags** — for browsing and search.
-8. **Platforms** — named services when the behavior is platform-specific.
-9. **Related entries** — closely connected conventions.
+7. **Severity** — a four-level estimate of the possible impact if ignored.
+8. **Category and tags** — for browsing and search.
+9. **Platforms** — named services when the behavior is platform-specific.
+10. **Related entries** — closely connected conventions.
+
+Severity describes the possible impact of the behavior, never the character of
+the person. Use level 1 for a small social awkwardness, level 2 for discomfort
+or disruption, level 3 for a serious effect on privacy or trust, and level 4
+for a clear consent, privacy, or safety risk.
 
 Categories describe the situation, such as calls, messaging, or privacy.
 Platforms such as Instagram, Facebook, and Messenger are a separate grouping
@@ -115,11 +121,13 @@ change as soon as it is safe and practical.
 - Does each translation sound natural and preserve the same social meaning?
 - Are named-platform claims current, qualified, and necessary?
 
-## Shared-page footer
+## Shared-page context
 
-The footer is explanatory rather than accusatory. It should briefly say what
-Netiquette is and why individual pages are designed to be shared. It should not
-say or imply “someone sent you this because you behaved badly.”
+The secondary context panel and footer are explanatory rather than accusatory.
+They should briefly say what Netiquette is, why the site exists, and why someone
+may choose to share an individual page. They should not say or imply “someone
+sent you this because you behaved badly.” The wording must remain tentative
+about any particular sender's intent.
 
 The text may be visually quieter than the entry, but it must retain accessible
 contrast and a readable font size. “Small” should mean secondary, not difficult

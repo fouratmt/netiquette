@@ -7,7 +7,7 @@ Last updated: 2026-07-15
 - The first usable MVP slice is implemented.
 - The generic Next.js/vinext starter and its generated files have been removed.
 - A fresh Git repository exists on the `main` branch.
-- The Vue interface and a five-entry multilingual catalog are implemented.
+- The Vue interface and a nineteen-entry multilingual catalog are implemented.
 - English, French, and Tunisian Arabic static pages are generated for GitHub
   Pages, including localized metadata and RTL HTML.
 - Pull-request CI and a separate GitHub Pages deployment workflow are ready
@@ -38,15 +38,20 @@ Last updated: 2026-07-15
 - [x] Add an isolated pnpm workspace and lockfile.
 - [x] Replace the starter README and tests.
 
-### 3. Core catalog — usable slice completed
+### 3. Core catalog — completed
 
-- [ ] Expand the catalog from 5 to approximately 12 entries.
+- [x] Expand the catalog from 5 to 19 entries.
 - [x] Implement browse, category, and platform filtering.
 - [x] Implement localized search and query-string state.
 - [x] Implement individual entry pages and related entries.
 - [x] Implement copy-link and native sharing.
 - [x] Implement language switching, preference persistence, and RTL layouts.
-- [x] Draft all five entries in English, French, and Tunisian Arabic.
+- [x] Draft all nineteen entries in English, French, and Tunisian Arabic.
+- [x] Add a localized four-level severity indicator to every entry page.
+- [x] Add a prominent homepage sharing callout.
+- [x] Add a compact QR code to every behavior page.
+- [x] Explain why the site exists, why it was created, and why a visitor may
+  have received an individual link.
 
 ### 4. Quality and release — in progress
 
@@ -55,8 +60,13 @@ Last updated: 2026-07-15
 - [x] Verify pre-rendered direct-route structure with a GitHub Pages base path.
 - [x] Verify localized metadata and HTML language/direction attributes.
 - [x] Run unit, route, build, and browser-flow tests.
+- [x] Polish the visual identity with a brighter color system and more varied
+  cards while preserving readability.
 - [x] Add a GitHub Pages deployment workflow.
 - [x] Add pull-request CI and deterministic Pages artifact validation.
+- [x] Add an installable, automatically updating PWA with offline precaching for
+  all generated routes.
+- [x] Add standard, maskable, and Apple touch application icons.
 - [ ] Conduct a tone and translation review with fluent readers.
 - [ ] Enable GitHub Pages and verify the deployed site.
 
@@ -68,6 +78,6 @@ layout at desktop and mobile widths.
 
 ## Immediate next step
 
-Choose whether the private repository will use a Pages-capable paid plan or be
-made public, then commit and push the workflows, enable GitHub Actions as the
-Pages source, and verify the first deployment.
+Review the expanded English, French, and Tunisian Arabic catalog with fluent
+readers. Then choose whether the private repository will use a Pages-capable
+paid plan or be made public before enabling the first deployment.

@@ -4,6 +4,10 @@ import { locales } from "../src/domain/types";
 import { searchEntries } from "../src/domain/search";
 
 describe("catalog content", () => {
+  it("contains the expanded nineteen-entry catalog", () => {
+    expect(entries).toHaveLength(19);
+  });
+
   it("has unique stable identifiers and slugs", () => {
     expect(new Set(entries.map((entry) => entry.id)).size).toBe(entries.length);
     expect(new Set(entries.map((entry) => entry.slug)).size).toBe(entries.length);
@@ -18,6 +22,7 @@ describe("catalog content", () => {
       expect(categoryIds.has(entry.category)).toBe(true);
       expect(entry.platforms.length).toBeGreaterThan(0);
       expect(entry.platforms.every((id) => platformIds.has(id))).toBe(true);
+      expect([1, 2, 3, 4]).toContain(entry.severity);
       expect(entry.related.every((id) => entryIds.has(id) && id !== entry.id)).toBe(
         true,
       );
@@ -59,6 +64,27 @@ describe("catalog search", () => {
 
   it("filters without requiring a query", () => {
     const results = searchEntries(entries, "en", { platform: "instagram" });
-    expect(results).toHaveLength(2);
+    expect(results).toHaveLength(9);
+  });
+
+  it("finds newly added situations in every language", () => {
+    expect(searchEntries(entries, "en", { query: "screenshot" })[0]?.id).toBe(
+      "ask-before-sharing-screenshots",
+    );
+    expect(searchEntries(entries, "fr", { query: "appel vidéo" })[0]?.id).toBe(
+      "ask-before-video-call",
+    );
+    expect(searchEntries(entries, "ar-TN", { query: "تاغ" })[0]?.id).toBe(
+      "check-before-photo-tagging",
+    );
+    expect(searchEntries(entries, "fr", { query: "commenter un live" })[0]?.id).toBe(
+      "think-before-commenting-on-live",
+    );
+    expect(searchEntries(entries, "en", { query: "late at night" })[0]?.id).toBe(
+      "plan-early-or-late-calls",
+    );
+    expect(searchEntries(entries, "ar-TN", { query: "طلب صداقة" })[0]?.id).toBe(
+      "send-friend-requests-with-context",
+    );
   });
 });

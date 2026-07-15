@@ -99,7 +99,7 @@ The MVP is a public, read-only catalog.
 - Search-engine and social-sharing metadata where the chosen deployment model
   permits it.
 - A small, curated starter catalog stored with the application.
-- A curated set of 19 polished behaviors, designed to keep expanding.
+- A curated set of 25 polished behaviors, designed to keep expanding.
 - A localized four-level impact indicator on every behavior page.
 - A prominent way to share the localized homepage as a complete guide.
 - Installable PWA metadata and icons.

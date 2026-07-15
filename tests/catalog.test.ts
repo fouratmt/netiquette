@@ -1,16 +1,31 @@
 import { describe, expect, it } from "vitest";
-import { categories, entries, platforms } from "../src/content/catalog";
+import {
+  categories,
+  entries,
+  entryAliases,
+  platforms,
+} from "../src/content/catalog";
 import { locales } from "../src/domain/types";
-import { searchEntries } from "../src/domain/search";
+import { normalizeSearchText, searchEntries } from "../src/domain/search";
 
 describe("catalog content", () => {
-  it("contains the expanded nineteen-entry catalog", () => {
-    expect(entries).toHaveLength(19);
+  it("contains at least one editor-managed entry", () => {
+    expect(entries.length).toBeGreaterThan(0);
   });
 
   it("has unique stable identifiers and slugs", () => {
     expect(new Set(entries.map((entry) => entry.id)).size).toBe(entries.length);
     expect(new Set(entries.map((entry) => entry.slug)).size).toBe(entries.length);
+    expect(new Set(entryAliases.map((alias) => alias.slug)).size).toBe(
+      entryAliases.length,
+    );
+    expect(
+      entryAliases.every(
+        (alias) =>
+          !entries.some((entry) => entry.slug === alias.slug) &&
+          entries.some((entry) => entry.slug === alias.targetSlug),
+      ),
+    ).toBe(true);
   });
 
   it("has complete translations and valid references", () => {
@@ -41,50 +56,50 @@ describe("catalog content", () => {
 });
 
 describe("catalog search", () => {
-  it("finds an English entry by a familiar term", () => {
-    const results = searchEntries(entries, "en", { query: "speakerphone" });
-    expect(results[0]?.id).toBe("speakerphone-consent");
-  });
-
   it("normalizes French accents", () => {
-    const results = searchEntries(entries, "fr", { query: "confidentialite" });
-    expect(results.some((entry) => entry.id === "speakerphone-consent")).toBe(true);
+    expect(normalizeSearchText("Confidentialité à l’écran")).toBe(
+      "confidentialite a l ecran",
+    );
   });
 
-  it("searches Tunisian Arabic and combines filters", () => {
-    const results = searchEntries(entries, "ar-TN", {
-      query: "قروب",
-      platform: "whatsapp",
+  it("finds every editor-managed entry by its localized title", () => {
+    for (const entry of entries) {
+      for (const locale of locales) {
+        const results = searchEntries(entries, locale, {
+          query: entry.translations[locale].title,
+        });
+        expect(results).toContain(entry);
+      }
+    }
+  });
+
+  it("combines search, category, and platform filters", () => {
+    const entry = entries[0];
+    const results = searchEntries(entries, "en", {
+      query: entry.translations.en.title,
+      category: entry.category,
+      platform: entry.platforms[0],
     });
-    expect(results.map((entry) => entry.id)).toContain("ask-before-group-add");
-    expect(results.every((entry) => entry.platforms.includes("whatsapp"))).toBe(
-      true,
-    );
+
+    expect(results).toContain(entry);
+    expect(
+      results.every(
+        (result) =>
+          result.category === entry.category &&
+          result.platforms.includes(entry.platforms[0]),
+      ),
+    ).toBe(true);
   });
 
   it("filters without requiring a query", () => {
-    const results = searchEntries(entries, "en", { platform: "instagram" });
-    expect(results).toHaveLength(9);
-  });
+    const platform = entries[0].platforms[0];
+    const results = searchEntries(entries, "en", { platform });
 
-  it("finds newly added situations in every language", () => {
-    expect(searchEntries(entries, "en", { query: "screenshot" })[0]?.id).toBe(
-      "ask-before-sharing-screenshots",
+    expect(results).toHaveLength(
+      entries.filter((entry) => entry.platforms.includes(platform)).length,
     );
-    expect(searchEntries(entries, "fr", { query: "appel vidéo" })[0]?.id).toBe(
-      "ask-before-video-call",
-    );
-    expect(searchEntries(entries, "ar-TN", { query: "تاغ" })[0]?.id).toBe(
-      "check-before-photo-tagging",
-    );
-    expect(searchEntries(entries, "fr", { query: "commenter un live" })[0]?.id).toBe(
-      "think-before-commenting-on-live",
-    );
-    expect(searchEntries(entries, "en", { query: "late at night" })[0]?.id).toBe(
-      "plan-early-or-late-calls",
-    );
-    expect(searchEntries(entries, "ar-TN", { query: "طلب صداقة" })[0]?.id).toBe(
-      "send-friend-requests-with-context",
+    expect(results.every((entry) => entry.platforms.includes(platform))).toBe(
+      true,
     );
   });
 });

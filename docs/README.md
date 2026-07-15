@@ -3,6 +3,9 @@
 This directory is the working source of truth for the Netiquette product. The
 documents are intentionally short and should evolve with the product.
 
+The behavior copy itself lives in [`../content/etiquettes/`](../content/etiquettes/).
+See the [non-technical editing guide](../content/README.md) to change or add it.
+
 ## Documents
 
 - [Product requirements](./product-requirements.md) — product purpose, users,
@@ -15,6 +18,12 @@ documents are intentionally short and should evolve with the product.
   behind them.
 - [Implementation progress](./implementation-progress.md) — current state,
   milestones, and next work.
+- [Quality baseline](./quality-baseline.md) — repeatable test, accessibility,
+  browser, and performance evidence.
+- [Editorial governance](./editorial-governance.md) — ownership, reporting,
+  review rules, and platform-claim cadence.
+- [Deployment and rollback](./deployment.md) — release, verification, and safe
+  recovery procedure.
 - [Open questions](./open-questions.md) — product decisions still being worked
   through with the project owner.
 

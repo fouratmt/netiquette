@@ -10,11 +10,24 @@ kind, neutral voice.
 ## Project status
 
 The first usable MVP is implemented. It includes a multilingual and shareable
-homepage, searchable and filterable catalog, nineteen complete etiquette entries,
+homepage, searchable and filterable catalog, twenty-five complete etiquette entries,
 direct shareable pages with QR codes, language switching, and right-to-left
 Tunisian Arabic. Every entry also includes a localized four-level impact rating.
 
 The current decisions and delivery plan live in [the project documentation](./docs/README.md).
+
+## Editing etiquette content
+
+The 25 behaviors are plain Markdown files in `content/etiquettes/`, one file per
+behavior with clearly labeled English, French, and Tunisian Arabic sections.
+Someone who does not code can add, remove, merge, rename, or edit behaviors
+directly through GitHub's web editor, without changing application code. See
+[the content editing guide](./content/README.md) and copy
+[`ETIQUETTE_TEMPLATE.md`](./content/ETIQUETTE_TEMPLATE.md) when adding a behavior.
+
+The build validates the template, metadata, translations, search words,
+categories, platforms, relationships, public slugs, and legacy URL aliases
+before deployment.
 
 ## Current direction
 
@@ -37,10 +50,15 @@ Useful commands:
 
 - `just` lists every available recipe.
 - `just typecheck` checks Vue and TypeScript source.
-- `just test` runs catalog, search, locale, and route tests.
+- `just test` runs catalog, search, locale, route, metadata, and component tests.
+- `just install-browser chromium` installs an automated test browser.
+- `just e2e` runs desktop/mobile Chromium accessibility and user flows.
+- `just cross-browser` runs those flows in Chromium, Firefox, and WebKit.
 - `just build` pre-renders the localized static site into `dist/`.
 - `just pages-build` builds with the default `/netiquette/` Pages base path.
 - `just pages-check` builds and validates the complete Pages artifact.
+- `just budget` enforces the JavaScript and CSS resource budget.
+- `just lighthouse` audits performance, accessibility, best practices, and SEO.
 - `just check` runs the complete verification sequence.
 
 `just` is the project task runner; pnpm remains the underlying dependency and

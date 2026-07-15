@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
-import { entries } from "../content/catalog";
+import { entries, entryAliases } from "../content/catalog";
 import { localeToRoute } from "../domain/locale";
 import { locales, type Locale, type RoutePage } from "../domain/types";
 import CatalogView from "../views/CatalogView.vue";
@@ -42,6 +42,17 @@ const localizedRoutes: RouteRecordRaw[] = locales.flatMap((locale) => {
       meta: routeMeta("entry", locale, {
         entryId: entry.id,
         entrySlug: entry.slug,
+      }),
+    })),
+    ...entryAliases.map<RouteRecordRaw>((alias) => ({
+      path: `${localePath}/etiquette/${alias.slug}`,
+      name: `entry-alias-${locale}-${alias.slug}`,
+      component: EntryView,
+      props: { locale, slug: alias.targetSlug },
+      meta: routeMeta("entry", locale, {
+        entryId: alias.targetSlug,
+        entrySlug: alias.targetSlug,
+        entryAlias: alias.slug,
       }),
     })),
   ];

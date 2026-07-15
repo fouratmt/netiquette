@@ -54,6 +54,12 @@ accepted as unreviewed machine translation.
 
 ## Entry template
 
+The editable source is one Markdown file per behavior in
+`content/etiquettes/`. Follow `content/README.md` for the GitHub web-editor
+workflow and copy `content/ETIQUETTE_TEMPLATE.md` when adding a behavior. The
+headings in that template must remain unchanged; the prose beneath them is the
+editorial content.
+
 Each entry should contain:
 
 1. **Title** — a short, positive instruction.

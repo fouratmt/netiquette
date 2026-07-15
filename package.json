@@ -9,12 +9,16 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite-ssg build",
+    "build": "vite-ssg build && node scripts/create-pages-404.mjs",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
+    "test:e2e": "playwright test --project=chromium --project=mobile-chromium",
+    "test:cross-browser": "playwright test",
+    "audit:lighthouse": "node scripts/audit-lighthouse.mjs",
     "verify:pages": "node scripts/verify-pages-build.mjs",
-    "check": "vue-tsc --noEmit && vitest run && vite-ssg build"
+    "verify:budget": "node scripts/verify-performance-budget.mjs",
+    "check": "vue-tsc --noEmit && vitest run && pnpm build"
   },
   "dependencies": {
     "@unhead/vue": "^2.1.15",
@@ -23,7 +27,13 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.55.0",
     "@types/node": "^26.1.0",
+    "@vue/test-utils": "^2.4.6",
+    "chrome-launcher": "^1.0.0",
+    "happy-dom": "^18.0.1",
+    "lighthouse": "^13.0.0",
     "@vitejs/plugin-vue": "^6.0.7",
     "typescript": "^6.0.3",
     "vite": "^8.1.3",

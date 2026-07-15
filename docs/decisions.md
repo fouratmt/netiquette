@@ -79,7 +79,7 @@
 - **Reason:** This is large enough to exercise search, categories, overlapping
   platforms, related entries, and translation without making initial editorial
   work unmanageable.
-- **Outcome:** The catalog was expanded to 19 entries while keeping the original
+- **Outcome:** The catalog was expanded first to 19, then to 25 entries while keeping the original
   five platform groupings.
 
 ## D-011 — Stable localized URLs
@@ -178,3 +178,58 @@
 - **Reason:** Public Pages hosting fits the read-only static architecture,
   provides HTTPS for PWA and sharing features, and keeps deployment tied to the
   same verified artifact used in CI.
+
+## D-021 — Shared social preview
+
+- **Decision:** Use one 1200×630 Netiquette preview image for all MVP routes.
+- **Status:** Accepted and implemented.
+- **Reason:** A consistent preview makes home and entry links recognizable
+  without creating and maintaining 75 localized entry images. Entry-specific
+  previews can be reconsidered if sharing feedback shows a clear need.
+
+## D-022 — Privacy-preserving MVP
+
+- **Decision:** Do not add analytics to the MVP.
+- **Status:** Accepted.
+- **Reason:** The qualitative success signals can be evaluated without visitor
+  tracking. Measurement requires a separate purpose, retention, consent, and
+  data-boundary decision.
+
+## D-023 — Editorial ownership and review
+
+- **Decision:** The project owner approves releases; contributors use pull
+  requests; problems are reported through GitHub Issues; named-platform claims
+  receive a quarterly review.
+- **Status:** Accepted.
+- **Reason:** This provides a lightweight, version-controlled process suitable
+  for a curated read-only catalog.
+
+## D-024 — Main branch protection
+
+- **Decision:** Do not require branch protection for the solo MVP yet; keep CI
+  running on every push and pull request, and enable required checks before
+  adding regular collaborators.
+- **Status:** Accepted, revisit when contributor access expands.
+- **Reason:** Required reviews would add little protection while one owner is
+  shipping the MVP, but automated verification remains mandatory evidence.
+
+## D-025 — Markdown etiquette source
+
+- **Decision:** Store each behavior in one Markdown file containing its small
+  metadata header and all three language sections.
+- **Status:** Accepted and implemented.
+- **Reason:** Editors can change or add catalog copy through GitHub's web editor
+  without understanding Vue or TypeScript. A build-time loader preserves the
+  typed application model and reports malformed files with direct, readable
+  validation errors.
+
+## D-026 — Markdown-only catalog lifecycle
+
+- **Decision:** Adding, removing, renaming, and merging etiquette entries must
+  require changes only inside `content/etiquettes/`. A survivor lists removed
+  or renamed slugs as aliases so published links remain useful.
+- **Status:** Accepted and implemented.
+- **Reason:** Non-technical editors should control the complete catalog, not
+  only its wording. Build-time alias routes preserve old shared URLs, related
+  links are remapped to survivors, and links to deleted entries are removed
+  automatically without maintaining a second registry in application code.

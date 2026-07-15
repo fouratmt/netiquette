@@ -9,6 +9,7 @@
   --green: #184e43;
   --green-bright: #dbe9df;
   --coral: #d76c4e;
+  --coral-ink: #98432d;
   --coral-soft: #f8dfd6;
   --yellow: #f3c95d;
   --sky: #cde9ee;
@@ -146,7 +147,7 @@ h3 {
 
 .eyebrow {
   margin-block-end: 1rem;
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -641,7 +642,7 @@ h3 {
 }
 
 .category-card__number {
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 0.78rem;
   font-weight: 850;
   letter-spacing: 0.1em;
@@ -660,7 +661,7 @@ h3 {
   position: absolute;
   inset-inline-end: 1.35rem;
   inset-block-end: 1rem;
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 1.5rem;
 }
 
@@ -776,7 +777,7 @@ h3 {
   place-items: center;
   border-radius: 50%;
   background: rgb(255 253 249 / 70%);
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 0.7rem;
   font-weight: 900;
 }
@@ -898,7 +899,7 @@ h3 {
 }
 
 .entry-card__link span:last-child {
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 1.25rem;
 }
 
@@ -1026,7 +1027,7 @@ h3 {
   place-items: center;
   border-radius: 50%;
   background: var(--coral-soft);
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 2rem;
 }
 
@@ -1268,7 +1269,7 @@ h3 {
 }
 
 .entry-section__number {
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -1535,7 +1536,7 @@ h3 {
 
 .language-card span:last-child {
   align-self: end;
-  color: var(--coral);
+  color: var(--coral-ink);
   font-size: 1.2rem;
 }
 

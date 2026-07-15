@@ -45,3 +45,9 @@ jobs:
 
       - name: Build and validate Pages site
         run: just pages-check "/${{ github.event.repository.name }}/"
+
+      - name: Install Chromium
+        run: just install-browser-ci chromium
+
+      - name: Run browser and accessibility flows
+        run: just e2e

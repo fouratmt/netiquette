@@ -4,7 +4,7 @@ import process from "node:process";
 
 const projectRoot = process.cwd();
 const distRoot = path.join(projectRoot, "dist");
-const catalogPath = path.join(projectRoot, "src/content/catalog.ts");
+const etiquetteRoot = path.join(projectRoot, "content/etiquettes");
 const routeLocales = ["en", "fr", "ar-tn"];
 const requiredPwaFiles = [
   "manifest.webmanifest",
@@ -47,25 +47,41 @@ async function findHtmlFiles(directory = distRoot) {
 }
 
 const basePath = normalizeBasePath(process.env.BASE_PATH);
-const catalogSource = await readFile(catalogPath, "utf8");
-const slugs = [
-  ...new Set(
-    [...catalogSource.matchAll(/^\s+slug: "([a-z0-9-]+)",$/gm)].map(
-      (match) => match[1],
-    ),
-  ),
-];
+const etiquetteFiles = (await readdir(etiquetteRoot)).filter((file) =>
+  file.endsWith(".md"),
+);
+const slugs = [];
+const aliases = [];
+for (const file of etiquetteFiles) {
+  const source = await readFile(path.join(etiquetteRoot, file), "utf8");
+  const slug = source.match(/^slug:\s*([a-z0-9-]+)\s*$/m)?.[1];
+  if (!slug) throw new Error(`${file} is missing a valid slug metadata field.`);
+  slugs.push(slug);
+
+  const aliasValue = source.match(/^aliases:\s*(.+)\s*$/m)?.[1]?.trim();
+  if (aliasValue && aliasValue !== "none") {
+    aliases.push(
+      ...aliasValue
+        .split(",")
+        .map((alias) => alias.trim())
+        .filter(Boolean),
+    );
+  }
+}
 
 if (slugs.length === 0) {
-  throw new Error("No etiquette slugs were found in src/content/catalog.ts.");
+  throw new Error("No etiquette Markdown files were found in content/etiquettes.");
 }
 
 const requiredPages = [
   "index.html",
+  "404.html",
   ...routeLocales.flatMap((locale) => [
     `${locale}/index.html`,
     `${locale}/etiquette/index.html`,
-    ...slugs.map((slug) => `${locale}/etiquette/${slug}/index.html`),
+    ...[...slugs, ...aliases].map(
+      (slug) => `${locale}/etiquette/${slug}/index.html`,
+    ),
   ]),
 ];
 
@@ -128,6 +144,22 @@ const requiredHeadMarkers = [
 for (const marker of requiredHeadMarkers) {
   if (!rootHtml.includes(marker)) {
     throw new Error(`index.html is missing PWA marker: ${marker}`);
+  }
+}
+
+const englishEntryHtml = await readFile(
+  path.join(distRoot, "en", "etiquette", slugs[0], "index.html"),
+  "utf8",
+);
+for (const marker of [
+  `rel="canonical" href="https://fourat.dev/netiquette/en/etiquette/${slugs[0]}"`,
+  'hreflang="fr"',
+  'hreflang="ar-TN"',
+  'hreflang="x-default"',
+  'property="og:image" content="https://fourat.dev/netiquette/social-preview.png"',
+]) {
+  if (!englishEntryHtml.includes(marker)) {
+    throw new Error(`Localized entry metadata is missing: ${marker}`);
   }
 }
 
@@ -203,9 +235,13 @@ if (
   );
 }
 
-const routesMissingFromPrecache = requiredPages.filter(
+// 404.html is copied after Workbox generation because it is a hosting fallback,
+// not an offline application route. All navigable catalog routes must be cached.
+const routesMissingFromPrecache = requiredPages
+  .filter((page) => page !== "404.html")
+  .filter(
   (page) => !serviceWorker.includes(`url:\"${page}\"`),
-);
+  );
 if (routesMissingFromPrecache.length > 0) {
   throw new Error(
     `PWA precache is missing routes:\n- ${routesMissingFromPrecache.join("\n- ")}`,

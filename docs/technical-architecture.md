@@ -2,8 +2,9 @@
 
 ## Status
 
-Implemented and deployed architecture for the first usable MVP. Accessibility,
-cross-browser, device, and editorial sign-off work remains open.
+Implemented and deployed architecture for the first usable MVP. Automated
+accessibility and cross-browser coverage is in place; real-device,
+screen-reader, performance, and editorial sign-off work remains open.
 
 ## Chosen direction
 
@@ -34,6 +35,7 @@ src/
   components/
   content/
     catalog.ts
+    etiquettes.ts
   domain/
     locale.ts
     search.ts
@@ -47,10 +49,21 @@ src/
   main.ts
 ```
 
-Catalog content currently lives in a typed TypeScript module. It keeps aligned
-translations, categories, platforms, and interface strings independent of Vue
-components. Splitting the module into smaller files can wait until catalog size
-makes that useful.
+Each behavior lives in one editor-friendly Markdown file under
+`content/etiquettes/`. Its small metadata header defines the stable slug,
+category, platforms, impact level, related entries, legacy URL aliases, and
+display order. Clearly labeled body sections contain English, French, and
+Tunisian Arabic prose.
+
+`src/content/etiquettes.ts` loads every Markdown file at build time, validates
+the template with filename-specific errors, and converts it to the typed model
+used by Vue. Interface strings, taxonomy labels, and impact-scale labels remain
+in `catalog.ts` because they change with application structure rather than an
+individual etiquette. Editors use `content/README.md` and
+`content/ETIQUETTE_TEMPLATE.md`; they do not need to modify TypeScript.
+The loader also remaps relationships that use a legacy alias and removes
+relationships to deleted entries, so adding, removing, renaming, or merging
+behaviors is entirely controlled by the Markdown files.
 
 ## Routes
 
@@ -74,6 +87,7 @@ used for related-entry validation.
 type EtiquetteEntry = {
   id: string;
   slug: string;
+  aliases: string[];
   category: string;
   platforms: string[];
   severity: 1 | 2 | 3 | 4;
@@ -90,9 +104,11 @@ type EtiquetteEntry = {
 };
 ```
 
-Tests reject duplicate IDs or slugs, missing translations, severity outside the
-four-level scale, invalid related-entry references, and unknown category or
-platform references.
+Tests reject duplicate IDs, slugs, or aliases; slug/alias conflicts; missing
+translations; severity outside the four-level scale; unknown category or
+platform references; malformed headings; missing metadata; and incomplete
+search words. Related references are normalized at build time: aliases resolve
+to the surviving entry and references to removed entries are omitted.
 
 ## Localization
 
@@ -142,7 +158,11 @@ Search state should be reflected in the URL query string, for example
 The application uses `vite-ssg` to pre-render every known route as nested static
 HTML, then hydrates those pages as a Vue application. This preserves fast direct
 links and localized metadata without requiring an application server. Adding a
-catalog entry automatically adds three concrete entry routes to the build.
+catalog entry automatically adds three concrete entry routes to the build. Each
+Markdown alias creates three legacy routes that render the surviving behavior
+while publishing the survivor as the canonical URL. Removing a file removes
+its routes; merging requires only adding the old slug to the survivor's aliases
+and deleting the old file.
 
 ## Progressive Web App
 
@@ -179,11 +199,14 @@ offline routes, or absent update activation behavior.
 ## Testing strategy
 
 - Unit tests for content validation, search ranking, and URL helpers.
-- Component tests for search, cards, and share/copy states.
+- Component tests for search, cards, installation, and share/copy states.
 - Route-level tests for home, entry, unknown slug, and query-string search.
-- One end-to-end path: find an entry, open it, and copy its link.
-- Automated accessibility checks supplemented by keyboard and screen-reader
-  review.
+- Automated desktop/mobile path: find an entry, open it, copy its link, and
+  switch language.
+- Automated axe-core checks across representative localized and not-found views.
+- Chromium, Firefox, WebKit, and mobile Chromium coverage, supplemented by
+  keyboard and manual screen-reader review.
+- Enforced JavaScript and CSS resource budgets.
 
 ## Deployment requirements
 

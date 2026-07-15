@@ -20,6 +20,7 @@ export type EntryTranslation = {
 export type EtiquetteEntry = {
   id: string;
   slug: string;
+  aliases: string[];
   category: string;
   platforms: string[];
   severity: SeverityLevel;

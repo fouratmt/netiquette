@@ -73,7 +73,7 @@ export default defineConfig({
     formatting: "none",
   },
   test: {
-    environment: "node",
+    environment: "happy-dom",
     include: ["tests/**/*.test.ts"],
   },
 });

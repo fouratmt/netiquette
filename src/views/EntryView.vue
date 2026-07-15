@@ -3,6 +3,8 @@ import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useHead } from "@unhead/vue";
 import EntryCard from "../components/EntryCard.vue";
+import QrShare from "../components/QrShare.vue";
+import SeverityIndicator from "../components/SeverityIndicator.vue";
 import ShareActions from "../components/ShareActions.vue";
 import {
   getCategory,
@@ -58,7 +60,11 @@ useHead(() => ({
 
           <h1>{{ translation.title }}</h1>
           <p class="entry-hero__takeaway">{{ translation.takeaway }}</p>
-          <ShareActions :locale="locale" :title="translation.title" />
+          <SeverityIndicator :locale="locale" :severity="entry.severity" />
+          <div class="entry-hero__sharing">
+            <ShareActions :locale="locale" :title="translation.title" />
+            <QrShare :locale="locale" />
+          </div>
         </div>
       </header>
 
@@ -95,6 +101,17 @@ useHead(() => ({
           </div>
         </aside>
       </div>
+
+      <section class="shared-context">
+        <div class="page-shell shared-context__card">
+          <span class="shared-context__icon" aria-hidden="true">?</span>
+          <div>
+            <h2>{{ ui[locale].receivedTitle }}</h2>
+            <p>{{ ui[locale].receivedBody }}</p>
+            <p class="shared-context__note">{{ ui[locale].receivedNote }}</p>
+          </div>
+        </div>
+      </section>
     </article>
 
     <section v-if="related.length" class="section related-section">

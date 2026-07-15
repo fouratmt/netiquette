@@ -9,9 +9,10 @@ kind, neutral voice.
 
 ## Project status
 
-The first usable MVP slice is implemented. It includes a multilingual homepage,
-searchable and filterable catalog, five complete etiquette entries, direct
-shareable pages, language switching, and right-to-left Tunisian Arabic.
+The first usable MVP is implemented. It includes a multilingual and shareable
+homepage, searchable and filterable catalog, nineteen complete etiquette entries,
+direct shareable pages with QR codes, language switching, and right-to-left
+Tunisian Arabic. Every entry also includes a localized four-level impact rating.
 
 The current decisions and delivery plan live in [the project documentation](./docs/README.md).
 
@@ -58,3 +59,16 @@ and select **GitHub Actions** as the source. The repository is currently private
 so its owner must either use a GitHub plan that supports Pages for private
 repositories or make the repository public. Without a custom domain, the
 expected project URL is `https://fouratmt.github.io/netiquette/`.
+
+## Progressive Web App
+
+The production build is an installable PWA. It includes a web-app manifest,
+standard and maskable icons, Apple touch metadata, a base-aware service worker,
+automatic updates, and offline precaching for every generated locale and
+behavior page.
+
+Supporting browsers show an **Install app** button on the homepage once their
+native installation criteria are met. Browsers that do not expose an install
+prompt, including Safari, can still use their normal **Add to Home Screen**
+command. PWA features require HTTPS in production; localhost is accepted for
+development and verification.

@@ -76,6 +76,7 @@ type EtiquetteEntry = {
   slug: string;
   category: string;
   platforms: string[];
+  severity: 1 | 2 | 3 | 4;
   related: string[];
   translations: Record<"en" | "fr" | "ar-TN", {
     title: string;
@@ -89,8 +90,9 @@ type EtiquetteEntry = {
 };
 ```
 
-Tests reject duplicate IDs or slugs, missing translations, invalid related-entry
-references, and unknown category or platform references.
+Tests reject duplicate IDs or slugs, missing translations, severity outside the
+four-level scale, invalid related-entry references, and unknown category or
+platform references.
 
 ## Localization
 
@@ -129,6 +131,9 @@ Search state should be reflected in the URL query string, for example
 - Each entry exposes its canonical URL.
 - Use `navigator.share` on supporting devices.
 - Always provide a copy-link fallback.
+- Render a small client-side QR code for the current behavior URL without using
+  an external QR service.
+- Give each localized homepage its own prominent copy/share callout.
 - Confirm successful copying with an accessible status message.
 - Do not collect recipient details or send messages on the visitor’s behalf.
 
@@ -138,6 +143,25 @@ The application uses `vite-ssg` to pre-render every known route as nested static
 HTML, then hydrates those pages as a Vue application. This preserves fast direct
 links and localized metadata without requiring an application server. Adding a
 catalog entry automatically adds three concrete entry routes to the build.
+
+## Progressive Web App
+
+`vite-plugin-pwa` generates the web-app manifest and a Workbox service worker
+after static generation. The PWA layer:
+
+- uses the configured Vite base path for GitHub Pages registration and scope;
+- precaches every generated HTML route, application asset, icon, and manifest;
+- claims open clients and activates updates immediately;
+- declares 192px, 512px, maskable, and Apple touch icons;
+- uses a standalone display mode and the localized root route as its start URL;
+- exposes a homepage install button when the browser fires its native
+  `beforeinstallprompt` event; and
+- remains installable through browser-native Add to Home Screen controls when
+  that event is not available.
+
+The Pages artifact validator rejects builds with missing PWA files, incorrect
+icon dimensions, incomplete manifest metadata, a base-path mismatch, missing
+offline routes, or absent update activation behavior.
 
 ## Accessibility
 

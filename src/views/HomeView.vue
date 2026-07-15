@@ -2,13 +2,15 @@
 import { RouterLink } from "vue-router";
 import { useHead } from "@unhead/vue";
 import EntryCard from "../components/EntryCard.vue";
+import InstallAppButton from "../components/InstallAppButton.vue";
 import SearchForm from "../components/SearchForm.vue";
+import ShareActions from "../components/ShareActions.vue";
 import { categories, entries, platforms, ui } from "../content/catalog";
 import { catalogPath } from "../domain/locale";
 import type { Locale } from "../domain/types";
 
 const props = defineProps<{ locale: Locale }>();
-const featured = entries.slice(0, 3);
+const featured = [entries[0], entries[5], entries[7]];
 
 useHead(() => ({
   title: `Netiquette — ${ui[props.locale].brandTagline}`,
@@ -43,6 +45,23 @@ useHead(() => ({
           {{ entries[0].translations[locale].title }}
         </RouterLink>
       </aside>
+    </div>
+
+    <div class="page-shell hero-share">
+      <span class="hero-share__spark" aria-hidden="true">✦</span>
+      <div class="hero-share__copy">
+        <strong>{{ ui[locale].shareGuideTitle }}</strong>
+        <p>{{ ui[locale].shareGuideBody }}</p>
+      </div>
+      <div class="hero-share__actions">
+        <ShareActions
+          :locale="locale"
+          title="Netiquette"
+          :copy-label="ui[locale].copyHomeLink"
+          :share-text="ui[locale].heroBody"
+        />
+        <InstallAppButton :locale="locale" />
+      </div>
     </div>
   </section>
 
@@ -79,6 +98,34 @@ useHead(() => ({
         >
           {{ platform.label[locale] }}
         </RouterLink>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-netiquette" class="section purpose-section">
+    <div class="page-shell">
+      <div class="purpose-section__intro">
+        <p class="eyebrow">{{ ui[locale].purposeEyebrow }}</p>
+        <h2>{{ ui[locale].purposeTitle }}</h2>
+        <p>{{ ui[locale].purposeIntro }}</p>
+      </div>
+
+      <div class="purpose-grid">
+        <article class="purpose-card purpose-card--exists">
+          <span aria-hidden="true">01</span>
+          <h3>{{ ui[locale].purposeExistsTitle }}</h3>
+          <p>{{ ui[locale].purposeExistsBody }}</p>
+        </article>
+        <article class="purpose-card purpose-card--created">
+          <span aria-hidden="true">02</span>
+          <h3>{{ ui[locale].purposeCreatedTitle }}</h3>
+          <p>{{ ui[locale].purposeCreatedBody }}</p>
+        </article>
+        <article class="purpose-card purpose-card--sent">
+          <span aria-hidden="true">03</span>
+          <h3>{{ ui[locale].purposeSentTitle }}</h3>
+          <p>{{ ui[locale].purposeSentBody }}</p>
+        </article>
       </div>
     </div>
   </section>

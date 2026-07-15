@@ -11,7 +11,6 @@ set. Resolved choices move to `decisions.md`.
    custom domain?
 3. Does the drafted explanatory footer feel neutral enough in all three
    languages, or should its wording change before launch?
-4. Which seven behaviors should complete the initial twelve-entry catalog?
 
 ## Later questions
 

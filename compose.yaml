@@ -1,0 +1,14 @@
+name: netiquette
+
+services:
+  web:
+    build:
+      context: .
+      target: production
+      args:
+        BASE_PATH: /
+        VITE_SITE_URL: ${SITE_URL:-http://localhost:8080/}
+    image: netiquette:local
+    ports:
+      - "${PORT:-8080}:8080"
+    restart: unless-stopped

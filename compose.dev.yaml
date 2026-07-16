@@ -1,0 +1,18 @@
+name: netiquette-dev
+
+services:
+  web:
+    build:
+      context: .
+      target: development
+    image: netiquette:dev
+    ports:
+      - "${DEV_PORT:-5173}:5173"
+    volumes:
+      - ./src:/app/src
+      - ./content:/app/content
+      - ./public:/app/public
+      - ./index.html:/app/index.html
+      - ./vite.config.ts:/app/vite.config.ts
+    environment:
+      BASE_PATH: /

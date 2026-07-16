@@ -65,6 +65,35 @@ Useful commands:
 package-script tool. Set `PNPM=/path/to/pnpm` when a non-default pnpm binary is
 needed.
 
+## Docker
+
+Run the optimized production site locally at
+[http://localhost:8080](http://localhost:8080):
+
+```bash
+just docker-up
+```
+
+Use `PORT=9000 just docker-up` to publish another host port. The image builds
+the statically generated application with Node and serves it from an unprivileged
+application stack behind Nginx, including direct-route fallback, PWA-safe cache
+headers, immutable asset caching, and a container health check.
+
+For hot-reloading development at
+[http://localhost:5173](http://localhost:5173), run:
+
+```bash
+just docker-dev
+```
+
+Application, Markdown content, public assets, and Vite configuration are mounted
+into the development container, while Linux dependencies stay in the image.
+Rebuild after changing dependencies. Stop either workflow with
+`just docker-down`.
+
+The Docker build defaults to `/` and does not change the GitHub Pages build,
+which continues to use `/netiquette/`.
+
 ## GitHub Pages
 
 The production site is live at

@@ -84,6 +84,23 @@ lighthouse host="127.0.0.1" port="43929" base_path="/netiquette/":
 preview host="127.0.0.1" base_path="/netiquette/" port="4173":
     BASE_PATH="{{ base_path }}" {{ pnpm }} preview --host "{{ host }}" --port "{{ port }}"
 
+# Build the production Docker image.
+docker-build:
+    docker compose build
+
+# Start the production container at http://localhost:8080.
+docker-up:
+    docker compose up --build --detach
+
+# Start the hot-reloading development container at http://localhost:5173.
+docker-dev:
+    docker compose -f compose.dev.yaml up --build
+
+# Stop and remove Docker containers created by either Compose workflow.
+docker-down:
+    docker compose down
+    docker compose -f compose.dev.yaml down
+
 # Run the complete local verification sequence.
 check:
     {{ pnpm }} check

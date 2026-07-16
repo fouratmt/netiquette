@@ -217,6 +217,21 @@ offline routes, or absent update activation behavior.
 - GitHub Pages is the active MVP deployment target.
 - The Sites workflow is explicitly excluded from this project.
 
+## Container runtime
+
+The repository includes a multi-stage `Dockerfile` with separate development,
+build, and production targets. The production target compiles the static Vue
+application with Node 22 and serves only the generated `dist` directory through
+Nginx. Its server configuration supports nested pre-rendered routes, an SPA
+fallback for unknown client-side routes, conservative PWA caching, immutable
+hashed assets, and a `/healthz` container health check.
+
+`compose.yaml` runs the production image at port 8080 by default.
+`compose.dev.yaml` uses the Vite development target and focused source bind
+mounts while keeping Linux dependencies inside the image. Docker builds use
+`/` as their base path; the independent GitHub Pages workflow retains
+`/netiquette/`.
+
 ## GitHub Pages compatibility
 
 GitHub Pages hosts the production MVP. The

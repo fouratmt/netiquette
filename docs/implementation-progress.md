@@ -149,6 +149,8 @@ MVP launch-readiness percentage until promoted into a milestone.
 - [x] Define editorial ownership, review, and contribution rules before more
   contributors edit the catalog.
 - [x] Define a quarterly review schedule for named-platform visibility claims.
+- [x] Add verified production and hot-reloading Docker runtimes with Compose,
+  unprivileged Nginx, route fallback, PWA cache headers, and a health check.
 - [ ] Reconsider whether privacy-preserving usage measurement is useful and define
   its data boundaries before adding analytics.
 

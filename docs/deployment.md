@@ -23,6 +23,27 @@ history:
 
 Do not rewrite `main` history or force-push as a rollback mechanism.
 
+## Docker runtime
+
+Docker is an additional self-hosted runtime; it does not replace the GitHub
+Pages release flow.
+
+```bash
+just docker-build
+just docker-up
+```
+
+The production container is available at `http://localhost:8080` by default.
+Set `PORT` and `SITE_URL` when another public origin is needed, for example:
+
+```bash
+PORT=9000 SITE_URL=https://netiquette.example/ just docker-up
+```
+
+`SITE_URL` is compiled into canonical and social metadata. Terminate the stack
+with `just docker-down`. Use `just docker-dev` for the Vite development server
+on port 5173; dependency changes require an image rebuild.
+
 ## Release sign-off
 
 The project owner records the approved date and release notes, creates the MVP

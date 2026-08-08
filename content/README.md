@@ -35,6 +35,9 @@ Most wording changes do not require touching metadata.
 - `platforms`: comma-separated platform names: `general`, `instagram`,
   `facebook`, `messenger`, and/or `whatsapp`.
 - `severity`: possible impact from `1` (light) to `4` (critical).
+- `featured`: `true` to prioritize the behavior in the homepage reminders, or
+  `false` otherwise. If fewer than three files are featured, the homepage fills
+  the remaining spaces from catalog order. Deleting a featured file is safe.
 - `related`: comma-separated slugs of related behaviors, or `none`. References
   to removed files disappear automatically; references to merged slugs point to
   the surviving behavior automatically.

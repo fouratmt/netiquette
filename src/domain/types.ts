@@ -24,6 +24,7 @@ export type EtiquetteEntry = {
   category: string;
   platforms: string[];
   severity: SeverityLevel;
+  featured: boolean;
   related: string[];
   translations: Record<Locale, EntryTranslation>;
 };

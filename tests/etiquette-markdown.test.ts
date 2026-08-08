@@ -9,6 +9,7 @@ slug: example-etiquette
 category: social-media
 platforms: general, facebook
 severity: 2
+featured: true
 related: none
 aliases: old-example-etiquette
 order: 99
@@ -69,6 +70,7 @@ describe("etiquette Markdown", () => {
     expect(entry.platforms).toEqual(["general", "facebook"]);
     expect(entry.related).toEqual([]);
     expect(entry.aliases).toEqual(["old-example-etiquette"]);
+    expect(entry.featured).toBe(true);
     expect(entry.translations.fr.title).toBe("Titre exemple");
     expect(entry.translations["ar-TN"].tags).toEqual(["مثال", "قاعدة", "بحث"]);
   });
@@ -81,6 +83,17 @@ describe("etiquette Markdown", () => {
       ),
     ).toThrow(
       'Invalid etiquette Markdown in broken-etiquette.md: unknown language heading "Arabic".',
+    );
+  });
+
+  it("rejects an invalid homepage feature flag in plain language", () => {
+    expect(() =>
+      parseEtiquetteMarkdown(
+        completeDocument.replace("featured: true", "featured: sometimes"),
+        "broken-feature.md",
+      ),
+    ).toThrow(
+      'Invalid etiquette Markdown in broken-feature.md: metadata field "featured" must be true or false.',
     );
   });
 

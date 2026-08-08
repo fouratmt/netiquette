@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useHead } from "@unhead/vue";
 import EntryCard from "../components/EntryCard.vue";
@@ -6,11 +7,16 @@ import InstallAppButton from "../components/InstallAppButton.vue";
 import SearchForm from "../components/SearchForm.vue";
 import ShareActions from "../components/ShareActions.vue";
 import { categories, entries, platforms, ui } from "../content/catalog";
+import { selectHomepageEntries } from "../content/homepage";
 import { catalogPath } from "../domain/locale";
-import type { Locale } from "../domain/types";
+import type { EtiquetteEntry, Locale } from "../domain/types";
 
-const props = defineProps<{ locale: Locale }>();
-const featured = [entries[0], entries[5], entries[7]];
+const props = withDefaults(
+  defineProps<{ locale: Locale; catalog?: readonly EtiquetteEntry[] }>(),
+  { catalog: () => entries },
+);
+const featured = computed(() => selectHomepageEntries(props.catalog));
+const example = computed(() => featured.value[0]);
 
 useHead(() => ({
   title: `Netiquette — ${ui[props.locale].brandTagline}`,
@@ -38,11 +44,11 @@ useHead(() => ({
         </RouterLink>
       </div>
 
-      <aside class="hero-note" aria-label="Netiquette example">
+      <aside v-if="example" class="hero-note" aria-label="Netiquette example">
         <span class="hero-note__quote" aria-hidden="true">“</span>
-        <p>{{ entries[0].translations[locale].takeaway }}</p>
-        <RouterLink :to="`${catalogPath(locale)}/${entries[0].slug}`">
-          {{ entries[0].translations[locale].title }}
+        <p>{{ example.translations[locale].takeaway }}</p>
+        <RouterLink :to="`${catalogPath(locale)}/${example.slug}`">
+          {{ example.translations[locale].title }}
         </RouterLink>
       </aside>
     </div>
@@ -130,7 +136,7 @@ useHead(() => ({
     </div>
   </section>
 
-  <section class="section">
+  <section v-if="featured.length" class="section">
     <div class="page-shell">
       <div class="section-heading section-heading--inline">
         <h2>{{ ui[locale].featuredTitle }}</h2>

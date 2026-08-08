@@ -37,7 +37,7 @@ const requiredMetadata = [
   "order",
 ] as const;
 
-const optionalMetadata = ["aliases"] as const;
+const optionalMetadata = ["aliases", "featured"] as const;
 const knownMetadata = [...requiredMetadata, ...optionalMetadata] as const;
 
 const requiredTranslationFields: TranslationField[] = [
@@ -132,6 +132,7 @@ export function parseEtiquetteMarkdown(
   const translations = parseTranslations(body, filename);
   const severity = Number(metadata.severity);
   const order = Number(metadata.order);
+  const featured = parseOptionalBoolean(metadata.featured, "featured", filename);
 
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(metadata.slug)) {
     fail(filename, `slug must use lowercase words and hyphens: ${metadata.slug}`);
@@ -168,10 +169,22 @@ export function parseEtiquetteMarkdown(
       category: metadata.category,
       platforms: csv(metadata.platforms),
       severity: severity as SeverityLevel,
+      featured,
       related: csv(metadata.related).filter((value) => value !== "none"),
       translations,
     },
   };
+}
+
+function parseOptionalBoolean(
+  value: string | undefined,
+  field: string,
+  filename: string,
+) {
+  if (value === undefined) return false;
+  if (value === "true") return true;
+  if (value === "false") return false;
+  fail(filename, `metadata field "${field}" must be true or false`);
 }
 
 function parseMetadata(source: string, filename: string) {

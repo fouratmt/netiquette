@@ -91,6 +91,7 @@ type EtiquetteEntry = {
   category: string;
   platforms: string[];
   severity: 1 | 2 | 3 | 4;
+  featured: boolean;
   related: string[];
   translations: Record<"en" | "fr" | "ar-TN", {
     title: string;

@@ -3,6 +3,7 @@ slug: speakerphone-consent
 category: calls-voice
 platforms: general
 severity: 3
+featured: true
 related: structured-voice-notes, ask-before-group-add
 order: 1
 ---

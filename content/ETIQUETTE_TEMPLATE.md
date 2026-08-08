@@ -3,6 +3,7 @@ slug: replace-with-permanent-url-name
 category: social-media
 platforms: general
 severity: 2
+featured: false
 related: none
 aliases: none
 order: 100

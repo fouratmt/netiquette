@@ -3,6 +3,7 @@ slug: ask-before-sharing-screenshots
 category: privacy-audience
 platforms: general, messenger, whatsapp
 severity: 4
+featured: true
 related: public-comment-audience, check-before-forwarding
 order: 8
 ---

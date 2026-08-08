@@ -40,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: just install
 
+      - name: Audit production dependencies
+        run: just audit
+
       - name: Verify project
         run: just verify
 

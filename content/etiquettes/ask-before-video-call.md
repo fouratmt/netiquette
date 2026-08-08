@@ -3,6 +3,7 @@ slug: ask-before-video-call
 category: calls-voice
 platforms: general, messenger, whatsapp
 severity: 2
+featured: true
 related: ask-if-now-is-a-good-time, speakerphone-consent
 order: 6
 ---

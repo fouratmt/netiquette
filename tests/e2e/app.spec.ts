@@ -71,3 +71,24 @@ test("keyboard navigation exposes the skip link and visible focus", async ({
   await page.keyboard.press("Enter");
   await expect(page.locator("#main-content")).toBeFocused();
 });
+
+test("a merged legacy link renders the survivor with canonical metadata", async ({
+  page,
+}) => {
+  await page.goto("en/etiquette/do-not-feed-the-trolls");
+
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Don’t feed the trolls",
+  );
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://fourat.dev/netiquette/en/etiquette/dont-feed-trolls",
+  );
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    "https://fourat.dev/netiquette/en/etiquette/dont-feed-trolls",
+  );
+
+  await page.getByRole("combobox", { name: "Language" }).selectOption("fr");
+  await expect(page).toHaveURL(/\/fr\/etiquette\/dont-feed-trolls$/);
+});

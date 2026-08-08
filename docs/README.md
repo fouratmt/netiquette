@@ -18,6 +18,9 @@ See the [non-technical editing guide](../content/README.md) to change or add it.
   behind them.
 - [Implementation progress](./implementation-progress.md) — current state,
   milestones, and next work.
+- [Project gap analysis and remaining work](./remaining-work.md) — the single
+  source of truth for functional, UX, architecture, testing, security,
+  reliability, CI/CD, developer-experience, release, and deferred work.
 - [Quality baseline](./quality-baseline.md) — repeatable test, accessibility,
   browser, and performance evidence.
 - [Editorial governance](./editorial-governance.md) — ownership, reporting,

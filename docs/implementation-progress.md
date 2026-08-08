@@ -1,12 +1,12 @@
 # Implementation progress
 
-Last updated: 2026-07-15
+Last updated: 2026-08-08
 
 ## Progress tracker
 
-**MVP launch readiness: 87% — 48 of 55 tracked tasks complete.**
+**MVP launch readiness: 86% — 51 of 59 tracked tasks complete.**
 
-`█████████████████▒░░ 87%`
+`█████████████████░░░ 86%`
 
 The percentage counts the unique checklist items in milestones 1–5 below.
 Optional post-MVP backlog items and the operational deployment checklist are
@@ -18,8 +18,8 @@ excluded so repeated checks do not inflate or reduce the result.
 | Vue scaffold | 7 / 7 | 100% |
 | Core catalog | 15 / 15 | 100% |
 | Quality and delivery | 10 / 10 | 100% |
-| Launch validation and editorial sign-off | 6 / 13 | 46% |
-| **Overall** | **48 / 55** | **87%** |
+| Launch validation and editorial sign-off | 9 / 17 | 53% |
+| **Overall** | **51 / 59** | **86%** |
 
 Update the numerator, denominator, percentage, and table whenever a tracked
 checkbox is added or completed.
@@ -36,12 +36,16 @@ checkbox is added or completed.
   a complete localized footer are implemented.
 - Canonical and language-alternate metadata, a shared social preview, a Pages
   404 fallback, component tests, automated WCAG checks, and cross-browser flows
-  are implemented and await the next production deployment.
+  are implemented; their final production release evidence remains open.
 - CI and GitHub Pages deployment run from GitHub Actions.
+- Production dependencies are patched, audited in CI, and monitored by
+  Dependabot; homepage feature selection is controlled safely through Markdown.
 - The public production site is live at `https://fourat.dev/netiquette/`; the
   standard GitHub Pages URL redirects there.
-- Remaining MVP work is validation and editorial sign-off rather than missing
-  core product functionality.
+- Core product functionality is implemented, while the comprehensive audit also
+  identified pre-launch code/security fixes and post-MVP hardening. See
+  `remaining-work.md`, the single source of truth for all open gaps; this file
+  retains milestone history and the launch-readiness calculation.
 
 ## Milestones
 
@@ -102,11 +106,17 @@ checkbox is added or completed.
 - [x] Add standard, maskable, and Apple touch application icons.
 - [x] Enable GitHub Pages, merge the MVP, and verify the first deployment.
 
-### 5. Launch validation and editorial sign-off — 6/13 complete
+### 5. Launch validation and editorial sign-off — 9/17 complete
 
 These tasks were extracted from the accessibility, quality, editorial, success
 signal, PWA, and testing requirements across the project documentation.
 
+- [x] Upgrade the vulnerable PostCSS dependency to a patched release and add a
+  production-dependency audit/update policy.
+- [x] Make homepage featured/example content resilient when Markdown entries
+  are removed, merged, or reordered.
+- [x] Add application-level regression coverage for the Markdown
+  deletion/merge lifecycle and legacy alias navigation.
 - [x] Smoke-test the production homepage, one localized direct entry, manifest,
   and service worker over HTTPS.
 - [x] Run automated WCAG 2.2 AA checks on the root/home flow, catalog, entry, and
@@ -124,7 +134,9 @@ signal, PWA, and testing requirements across the project documentation.
   entry URLs.
 - [x] Record and enforce an initial JavaScript and CSS performance budget.
 - [x] Run an initial Lighthouse production-build review and enforce minimum
-  category scores; repeat it against production before formal release.
+  category scores.
+- [ ] Run Lighthouse against the deployed production homepage and a
+  representative entry, then record the results before formal release.
 - [ ] Review all twenty-five French and Tunisian Arabic entries with fluent
   readers, including the footer and impact labels.
 - [ ] Audit impact levels, nuance, and named-platform claims for consistency and
@@ -159,7 +171,7 @@ MVP launch-readiness percentage until promoted into a milestone.
 **Status: deployed; formal launch sign-off is still pending.**
 
 This operational checklist intentionally repeats a few validation tasks and is
-not included in the 87% calculation.
+not included in the 86% calculation.
 
 ### Repository and automation
 
@@ -214,6 +226,7 @@ not included in the 87% calculation.
 
 ## Immediate next step
 
-Complete the fluent French and Tunisian Arabic review, screen-reader flow, and
-real-device PWA/QR checks. These are now the highest-value gates before treating
-the already-live deployment as formally approved.
+Resolve the production Lighthouse regression, deploy the current candidate,
+and repeat its homepage/entry audits. Then finish fluent editorial review,
+screen-reader, real-device PWA/offline/QR, and usability evidence before formal
+release.

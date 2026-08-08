@@ -27,6 +27,10 @@ typecheck:
 test:
     {{ pnpm }} test
 
+# Fail when a production dependency has a high- or critical-severity advisory.
+audit:
+    {{ pnpm }} audit:production
+
 # Install browser engines used by the end-to-end suite.
 install-browser browser="chromium":
     {{ pnpm }} exec playwright install "{{ browser }}"

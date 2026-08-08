@@ -35,7 +35,7 @@ jobs:
           cache: pnpm
 
       - name: Set up just
-        uses: extractions/setup-just@v3
+        uses: extractions/setup-just@v4
         with:
           just-version: 1.46.0
 

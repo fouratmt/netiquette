@@ -24,8 +24,8 @@
   "dependencies": {
     "@unhead/vue": "^2.1.15",
     "qrcode.vue": "^3.10.0",
-    "vue": "^3.5.39",
-    "vue-router": "^4.6.4"
+    "vue": "^3.5.41",
+    "vue-router": "^5.2.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

@@ -8,6 +8,13 @@ updates:
       time: "06:00"
       timezone: Africa/Tunis
     open-pull-requests-limit: 5
+    ignore:
+      # vite-ssg 28.x renders metadata with the Unhead 2 runtime.
+      - dependency-name: "@unhead/vue"
+        update-types: ["version-update:semver-major"]
+      # vue-tsc 3.x uses the JavaScript compiler API removed in TypeScript 7.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
     groups:
       production-dependencies:
         dependency-type: production

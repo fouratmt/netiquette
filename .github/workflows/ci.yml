@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -33,7 +33,7 @@ jobs:
           cache: pnpm
 
       - name: Set up just
-        uses: extractions/setup-just@v3
+        uses: extractions/setup-just@v4
         with:
           just-version: 1.46.0
 
@@ -54,3 +54,21 @@ jobs:
 
       - name: Run browser and accessibility flows
         run: just e2e
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Build production container
+        run: docker build --tag netiquette:ci .
+
+      - name: Smoke test production container
+        run: |
+          docker run --detach --name netiquette-ci --publish 8080:8080 netiquette:ci
+          trap 'docker logs netiquette-ci; docker rm --force netiquette-ci' EXIT
+          curl --fail --retry 10 --retry-connrefused --retry-delay 1 http://127.0.0.1:8080/healthz
+          curl --fail --silent --output /tmp/netiquette-ci.html http://127.0.0.1:8080/en
+          grep -q 'id="app"' /tmp/netiquette-ci.html

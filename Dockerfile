@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
 
-FROM node:22-alpine AS dependencies
+FROM node:26-alpine AS dependencies
 
 WORKDIR /app
-RUN corepack enable && corepack prepare pnpm@11.7.0 --activate
-COPY package.json pnpm-lock.yaml ./
+RUN npm install --global pnpm@11.7.0
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 FROM dependencies AS development
@@ -22,7 +22,7 @@ ENV BASE_PATH=${BASE_PATH}
 ENV VITE_SITE_URL=${VITE_SITE_URL}
 RUN pnpm build && pnpm verify:budget
 
-FROM nginxinc/nginx-unprivileged:1.27-alpine AS production
+FROM nginxinc/nginx-unprivileged:1.31-alpine AS production
 
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html

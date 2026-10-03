@@ -4,12 +4,10 @@ packages:
 # Avoid dependencies published within the last seven days unless intentionally
 # reviewed and added to the exclusion list.
 minimumReleaseAge: 10080
-minimumReleaseAgeExclude:
-  # Reviewed exception: fixes GHSA-2v37-7h3g-55p8 while still inside the
-  # seven-day quarantine window.
-  - nanoid@3.3.17
 
 # Keep the Vue compiler/build chain on the patched PostCSS line.
 overrides:
   postcss: ^8.5.23
-  nanoid: ^3.3.17
+  nanoid: ^3.3.18
+  # Patched serializer for the Workbox build chain (GHSA-gfhx-hw2g-v5hg).
+  serialize-javascript: ^7.1.2
